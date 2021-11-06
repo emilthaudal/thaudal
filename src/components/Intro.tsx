@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import * as React from "react";
 
-const Home: NextPage = () => {
+function Intro() {
   return (
     <div>
       <Head>
@@ -22,6 +21,5 @@ const Home: NextPage = () => {
       </main>
     </div>
   );
-};
-
-export default Home;
+}
+export default Intro;
