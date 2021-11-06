@@ -1,23 +1,14 @@
 import Head from "next/head";
 import * as React from "react";
+import Header from "./Header";
 
 function Intro() {
   return (
     <div>
-      <Head>
-        <title>thaudal</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header>
-        <nav className="flex items-center p-6 container mx-auto">
-          <ul className="mx-2">Home</ul>
-          <ul className="mx-2">Pilou</ul>
-        </nav>
-      </header>
-
-      <main className="flex items-center p-6 container mx-auto">
+      <Header />
+      <main className="flex items-center p-6 container mx-auto flex-col">
         <h1 className="font-thin font-sans text-3xl">thaudal</h1>
-        <p></p>
+        <p className="">This is the page about thaudal</p>
       </main>
     </div>
   );
