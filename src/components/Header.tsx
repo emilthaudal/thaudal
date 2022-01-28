@@ -15,9 +15,6 @@ function Header() {
             <Link href="/">Home</Link>
           </li>
           <li className="mx-2">
-            <Link href="/Pilou">Pilou</Link>
-          </li>
-          <li className="mx-2">
             <Link href="/Emil">Emil</Link>
           </li>
         </ul>
