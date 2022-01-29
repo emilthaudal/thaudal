@@ -17,7 +17,7 @@ function Header() {
             </Link>
           </li>
           <li className="mx-2">
-            <Link href="/Emil">
+            <Link href="/emil">
               <a>Emil</a>
             </Link>
           </li>
