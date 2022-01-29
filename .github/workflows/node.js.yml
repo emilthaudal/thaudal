@@ -46,5 +46,6 @@ jobs:
           remote_folder: /www/
           # The local folder location
           local_folder: out
-          # Remove existing files inside FTP remote folder
+          # Remove existing files insie FTP remote folder
           cleanup: true
+
