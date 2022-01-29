@@ -12,10 +12,14 @@ function Header() {
       <header>
         <ul className="flex items-center p-6 container mx-auto">
           <li className="mx-2">
-            <Link href="/">Home</Link>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
           </li>
           <li className="mx-2">
-            <Link href="/Emil">Emil</Link>
+            <Link href="/Emil">
+              <a>Emil</a>
+            </Link>
           </li>
         </ul>
       </header>
