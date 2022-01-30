@@ -21,6 +21,11 @@ function Header() {
               <a>Emil</a>
             </Link>
           </li>
+          <li className="mx-2">
+            <Link href="/todolist/todolist">
+              <a>TodoLists</a>
+            </Link>
+          </li>
         </ul>
       </header>
     </div>
