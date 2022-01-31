@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import TodoListComponent from "../../components/TodoListComponent";
-import TodoList from "../../model/TodoList";
+import Header from "../../components/header";
+import TodoListComponent from "../../components/todolistcomponent";
+import TodoList from "../../model/todolist";
 function TodoList(): JSX.Element {
   const [lists, setLists] = useState<TodoList[]>();
   const [isLoading, setLoading] = useState(false);
