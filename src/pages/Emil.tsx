@@ -1,6 +1,5 @@
 import * as React from "react";
-// @ts-ignore
-import Header from "../components/Header";
+import Header from "../components/header";
 function Emil(): JSX.Element {
   return (
     <div>
