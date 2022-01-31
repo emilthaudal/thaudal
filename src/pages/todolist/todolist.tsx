@@ -1,10 +1,7 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-// @ts-ignore
 import Header from "../../components/Header";
-// @ts-ignore
 import TodoListComponent from "../../components/TodoListComponent";
-// @ts-ignore
 import TodoList from "../../model/TodoList";
 function TodoList(): JSX.Element {
   const [lists, setLists] = useState<TodoList[]>();

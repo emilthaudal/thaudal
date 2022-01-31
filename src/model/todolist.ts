@@ -1,4 +1,3 @@
-// @ts-ignore
 import TodoItem from "./TodoItem";
 
 interface TodoList {
