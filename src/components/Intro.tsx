@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import Header from "./header";
+import Header from "./Header";
 
 function Intro(): JSX.Element {
   const [showFriday, setShowFriday] = React.useState(false);
