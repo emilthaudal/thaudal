@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+// @ts-ignore
 import Header from "../../components/header";
 import TodoListComponent from "../../components/todolistComponent";
 import TodoList from "../../model/todolist";

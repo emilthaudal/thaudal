@@ -1,4 +1,5 @@
 import * as React from "react";
+// @ts-ignore
 import Header from "../components/header";
 function Emil() {
   return (
