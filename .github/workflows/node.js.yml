@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main]
+    branches: [static]
   pull_request:
-    branches: [main]
+    branches: [static]
 
 jobs:
   build:
@@ -48,4 +48,3 @@ jobs:
           local_folder: out
           # Remove existing files insie FTP remote folder
           cleanup: true
-
