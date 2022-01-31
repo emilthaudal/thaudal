@@ -6,7 +6,7 @@ import Header from "../../components/header";
 import TodoListComponent from "../../components/todolistComponent";
 // @ts-ignore
 import TodoList from "../../model/todolist";
-function TodoList() {
+function TodoList(): JSX.Element {
   const [lists, setLists] = useState<TodoList[]>();
   const [isLoading, setLoading] = useState(false);
 

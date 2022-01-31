@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 
-function Header() {
+function Header(): JSX.Element {
   return (
     <div>
       <Head>

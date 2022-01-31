@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import Header from "./header";
 
-function Intro() {
+function Intro(): JSX.Element {
   const [showFriday, setShowFriday] = React.useState(false);
   const [isItFriday, setIsItFriday] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
