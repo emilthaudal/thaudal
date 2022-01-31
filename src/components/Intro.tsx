@@ -1,7 +1,5 @@
-import Head from "next/head";
 import * as React from "react";
 import { useEffect } from "react";
-// @ts-ignore
 import Header from "./header";
 
 function Intro() {
