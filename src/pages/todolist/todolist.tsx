@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import Header from "../../components/header";
 import TodoListComponent from "../../components/todolistcomponent";
 import TodoList from "../../model/todolist";
 function TodoList(): JSX.Element {
@@ -36,7 +35,6 @@ function TodoList(): JSX.Element {
 
   return (
     <div>
-      <Header />
       <main className="container flex flex-col">{todoLists}</main>
     </div>
   );
