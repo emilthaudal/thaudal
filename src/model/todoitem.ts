@@ -1,4 +1,4 @@
-declare interface TodoItem {
+interface TodoItem {
   Id: string;
   Completed: boolean;
   Title: string;
