@@ -1,6 +1,6 @@
 import * as React from "react";
 // @ts-ignore
-import TodoList from "../model/todolist";
+import TodoList from "../model/TodoList";
 
 function TodoListComponent(props: TodoList): JSX.Element {
   return (

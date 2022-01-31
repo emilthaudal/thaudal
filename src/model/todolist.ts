@@ -1,5 +1,5 @@
 // @ts-ignore
-import TodoItem from "./todoitem";
+import TodoItem from "./TodoItem";
 
 interface TodoList {
   Title: string;
