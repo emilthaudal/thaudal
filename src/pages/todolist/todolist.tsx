@@ -8,15 +8,26 @@ function TodoList(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://localhost:7204/api/TodoList/GetLists")
-      .then((res) => res.json())
-      .then((data) => {
+    fetch(process.env.NEXT_PUBLIC_API + "/api/TodoList/GetLists")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Error getting lists");
+      })
+      .then((response) => {
+        if (!response) {
+          return;
+        }
         let todoLists: TodoList[] = [];
-        data.map((list: TodoList) => {
+        response.map((list: TodoList) => {
           todoLists.push(list);
         });
         setLists(todoLists);
         setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
