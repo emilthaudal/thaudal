@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { getLists } from "../../api/api";
 import TodoListComponent from "../../components/todolistcomponent";
 import TodoList from "../../model/todolist";
 function TodoList(): JSX.Element {
@@ -8,20 +9,12 @@ function TodoList(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://localhost:7204/api/TodoList/GetLists")
-      .then((res) => res.json())
-      .then((data) => {
-        let todoLists: TodoList[] = [];
-        data.map((list: TodoList) => {
-          todoLists.push(list);
-        });
-        setLists(todoLists);
-        setLoading(false);
-      });
+    setLists(getLists());
+    setLoading(false);
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-  if (!lists) return <p>No todolists found</p>;
+  if (!lists || lists.length == 0) return <p>No todolists found</p>;
 
   const todoLists = lists.map((list, index) => (
     <TodoListComponent
