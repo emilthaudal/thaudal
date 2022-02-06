@@ -37,24 +37,19 @@ function Login(): JSX.Element {
 
   if (signIn) {
     return (
-      <div>
+      <div className="container">
         <CreateUserComponent />
-        <button onSubmit={() => setSignIn(false)}>
+        <button onClick={() => setSignIn(false)}>
           Already have a user? Login
         </button>
       </div>
     );
   }
   return (
-    <div>
+    <div className="container">
       <LoginComponent></LoginComponent>
-      <button onSubmit={() => setSignIn(true)}>
-        Dont have a user? Sign-up
-      </button>
+      <button onClick={() => setSignIn(true)}>Dont have a user? Sign-up</button>
     </div>
   );
 }
 export default Login;
-function setAuth(arg0: { token: any; user: any; refresh: any }) {
-  throw new Error("Function not implemented.");
-}

@@ -7,7 +7,6 @@ import { authAtom } from "../state/auth";
 
 function Header(): JSX.Element {
   const [auth, setAuth] = useRecoilState(authAtom);
-  React.useEffect(() => {}, [auth]);
 
   function onLogOut() {
     logout().then(() => {
@@ -26,7 +25,7 @@ function Header(): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="flex flex-row">
-        <div className="">
+        <div className="self-start">
           <ul className="flex items-center p-6 container mx-auto">
             <li className="mx-2 hover:text-emerald-500">
               <Link href="/">
@@ -45,7 +44,7 @@ function Header(): JSX.Element {
             </li>
           </ul>
         </div>
-        <div>
+        <div className="self-end">
           <ul className="flex items-center p-6 container mx-auto">
             {!auth.user ? (
               <li className="mx-2 hover:text-emerald-500">
@@ -57,7 +56,7 @@ function Header(): JSX.Element {
                   <p>{auth.user}</p>
                 </li>
                 <li className="mx-2 hover:text-emerald-500">
-                  <button onSubmit={() => onLogOut}>Logout</button>
+                  <button onClick={() => onLogOut}>Logout</button>
                 </li>
               </div>
             )}

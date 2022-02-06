@@ -29,9 +29,13 @@ function CreateUserComponent(): JSX.Element {
     router.push("/");
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-column m-4 p-6 space-x-4 space-y-4"
+    >
       <label htmlFor="email">email</label>
       <input
+        className="text-black"
         id="email"
         {...register("email", {
           required: "required",
@@ -45,6 +49,7 @@ function CreateUserComponent(): JSX.Element {
       {errors.email && <span role="alert">{errors.email.message}</span>}
       <label htmlFor="password">password</label>
       <input
+        className="text-black"
         id="password"
         {...register("password", {
           required: "required",
@@ -56,7 +61,9 @@ function CreateUserComponent(): JSX.Element {
         type="password"
       />
       {errors.password && <span role="alert">{errors.password.message}</span>}
+      <label htmlFor="name">name</label>
       <input
+        className="text-black"
         id="name"
         {...register("name", {
           required: "required",
