@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import * as React from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { login } from "../api/api";
+import { useSetRecoilState } from "recoil";
+import { createUser } from "../api/api";
 import { authAtom } from "../state/auth";
 
-function LoginComponent(): JSX.Element {
-  const router = useRouter();
+function CreateUserComponent(): JSX.Element {
   const setAuth = useSetRecoilState(authAtom);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,15 +16,17 @@ function LoginComponent(): JSX.Element {
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
-    login(data.email, data.password).then((response) =>
-      setAuth({
-        token: response.jwtToken,
-        user: response.username,
-        refresh: response.refreshToken,
-      })
-    );
-    router.push("/");
+    createUser(data.email, data.password, data.name)
+      .then((response) =>
+        setAuth({
+          token: response.jwtToken,
+          user: response.username,
+          refresh: response.refreshToken,
+        })
+      )
+      .catch(() => {});
     reset();
+    router.push("/");
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -54,8 +56,16 @@ function LoginComponent(): JSX.Element {
         type="password"
       />
       {errors.password && <span role="alert">{errors.password.message}</span>}
+      <input
+        id="name"
+        {...register("name", {
+          required: "required",
+        })}
+        type="text"
+      />
+      {errors.name && <span role="alert">{errors.name.message}</span>}
       <button type="submit">SUBMIT</button>
     </form>
   );
 }
-export default LoginComponent;
+export default CreateUserComponent;

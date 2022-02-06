@@ -10,10 +10,11 @@ function TodoList(): JSX.Element {
   useEffect(() => {
     setLoading(true);
     setLists(getLists());
+    setLoading(false);
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-  if (!lists) return <p>No todolists found</p>;
+  if (!lists || lists.length == 0) return <p>No todolists found</p>;
 
   const todoLists = lists.map((list, index) => (
     <TodoListComponent

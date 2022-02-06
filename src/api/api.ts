@@ -15,6 +15,7 @@ const saveRefreshToken = (token: string | object) =>
   Cookies.set(REFRESH_COOKIE_NAME, token);
 const saveToken = (token: string | object) => Cookies.set(COOKIE_NAME, token);
 const clearToken = () => Cookies.remove(COOKIE_NAME);
+const clearRefreshToken = () => Cookies.remove(REFRESH_COOKIE_NAME);
 
 function fetchJSONWithToken(url: string, options = {}) {
   const token = retrieveToken();
@@ -46,6 +47,23 @@ async function login(email: string, password: string) {
       }),
     });
     saveToken(response.body.jwtToken);
+    saveRefreshToken(response.body.refreshToken);
+    return response.body;
+  } catch (error) {}
+}
+
+async function createUser(email: string, password: string, name: string) {
+  try {
+    const response: any = await fetchJSON(baseUrl + "/api/Users/create", {
+      method: "POST",
+      body: JSON.stringify({
+        Username: email,
+        Password: password,
+        Name: name,
+      }),
+    });
+    saveToken(response.body.jwtToken);
+    saveRefreshToken(response.body.refreshToken);
     return response.body;
   } catch (error) {}
 }
@@ -58,12 +76,13 @@ async function logout() {
     },
   });
   clearToken();
+  clearRefreshToken();
 }
 
 function getLists(): TodoList[] {
-  try {
-    let todoLists: TodoList[] = [];
+  let todoLists: TodoList[] = [];
 
+  try {
     const response: any = fetchJSONWithToken(
       baseUrl + "/api/TodoList/GetLists",
       {
@@ -75,7 +94,7 @@ function getLists(): TodoList[] {
     });
     return todoLists;
   } catch (error) {
-    return [];
+    return todoLists;
   }
 }
 
@@ -89,17 +108,19 @@ const shouldRefreshToken = (error: {
 
 const refreshToken = async () => {
   try {
+    const rToken = retrieveRefreshToken();
+    const body = JSON.stringify({ refreshToken: rToken });
+    console.log(body);
     const response: any = await fetchJSONWithToken(
       baseUrl + "/api/users/refresh-token",
       {
         method: "POST",
-        body: {
-          refreshToken: retrieveRefreshToken(),
-        },
+        body: body,
       }
     );
-    saveRefreshToken(response.body.token);
     saveToken(response.body.jwtToken);
+    saveRefreshToken(response.body.refreshToken);
+    return response.body;
   } catch (error) {
     // Clear token and continue with the Promise catch chain
     clearToken();
@@ -113,4 +134,13 @@ const fetch = configureRefreshFetch({
   refreshToken,
 });
 
-export { fetch, login, logout, getLists };
+export {
+  fetch,
+  login,
+  logout,
+  getLists,
+  createUser,
+  retrieveRefreshToken,
+  retrieveToken,
+  refreshToken,
+};
