@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { getLists } from "../../api/api";
 import TodoListComponent from "../../components/todolistcomponent";
 import TodoList from "../../model/todolist";
 function TodoList(): JSX.Element {
@@ -8,27 +9,7 @@ function TodoList(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
-    fetch(process.env.NEXT_PUBLIC_API + "/api/TodoList/GetLists")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error getting lists");
-      })
-      .then((response) => {
-        if (!response) {
-          return;
-        }
-        let todoLists: TodoList[] = [];
-        response.map((list: TodoList) => {
-          todoLists.push(list);
-        });
-        setLists(todoLists);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setLists(getLists());
   }, []);
 
   if (isLoading) return <p>Loading...</p>;

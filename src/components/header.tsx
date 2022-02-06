@@ -9,24 +9,33 @@ function Header(): JSX.Element {
         <title>thaudal</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <ul className="flex items-center p-6 container mx-auto">
-          <li className="mx-2">
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          <li className="mx-2">
-            <Link href="/emil">
-              <a>Emil</a>
-            </Link>
-          </li>
-          <li className="mx-2">
-            <Link href="/todolist/todolist">
-              <a>TodoLists</a>
-            </Link>
-          </li>
-        </ul>
+      <header className="flex flex-row">
+        <div className="">
+          <ul className="flex items-center p-6 container mx-auto">
+            <li className="mx-2">
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li className="mx-2">
+              <Link href="/emil">
+                <a>Emil</a>
+              </Link>
+            </li>
+            <li className="mx-2">
+              <Link href="/todolist/todolist">
+                <a>TodoLists</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul className="flex items-center p-6 container mx-auto">
+            <li className="mx-2">
+              <Link href="/login">Login</Link>
+            </li>
+          </ul>
+        </div>
       </header>
     </div>
   );
