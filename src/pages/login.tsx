@@ -1,3 +1,4 @@
+import { sign } from "crypto";
 import { useRouter } from "next/router";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import LoginComponent from "../components/logincomponent";
 import { authAtom } from "../state/auth";
 
 function Login(): JSX.Element {
-  const [signIn, setSignIn] = useState(false);
+  const [signIn, setSignIn] = useState(true);
   const [loading, setIsLoading] = useState(false);
   const router = useRouter();
   const [auth, setAuth] = useRecoilState(authAtom);
@@ -35,20 +36,12 @@ function Login(): JSX.Element {
     return <div>Loading</div>;
   }
 
-  if (signIn) {
-    return (
-      <div className="container">
-        <CreateUserComponent />
-        <button onClick={() => setSignIn(false)}>
-          Already have a user? Login
-        </button>
-      </div>
-    );
-  }
   return (
     <div className="container">
-      <LoginComponent></LoginComponent>
-      <button onClick={() => setSignIn(true)}>Dont have a user? Sign-up</button>
+      <CreateUserComponent login={signIn}></CreateUserComponent>
+      <button onClick={() => setSignIn(!signIn)}>
+        Already have a user? Login
+      </button>
     </div>
   );
 }

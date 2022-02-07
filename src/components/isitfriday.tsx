@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
+import BigButton from "./bigButton";
 
 function IsItFriday() {
   const [showFriday, setShowFriday] = React.useState(false);
   const [isItFriday, setIsItFriday] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
-
-  useEffect(() => {}, []);
+  const [error, setError] = useState("");
 
   function clickButton() {
     setLoading(true);
@@ -15,22 +15,27 @@ function IsItFriday() {
       .then((data) => {
         setIsItFriday(data);
         setLoading(false);
+        setShowFriday(true);
       })
       .catch((err) => {
         setLoading(false);
-        setIsItFriday(false);
+        setError("Could not fetch data");
+        setShowFriday(false);
       });
-    setShowFriday(true);
   }
+
+  if (error != "") {
+    return <div>error</div>;
+  }
+
   return (
     <div>
-      <div className="relative rounded-xl overflow-auto p-8">
-        <button
-          className="transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-emerald-500 duration-300 py-2 px-3 bg-indigo-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none"
-          onClick={clickButton}
-        >
-          Er det fredag?
-        </button>
+      <div className="p-8">
+        <BigButton
+          onClick={() => clickButton()}
+          text={"Er det fredag?"}
+          type="button"
+        ></BigButton>
       </div>
 
       {showFriday ? <p>{isItFriday ? "Ja" : "Nej"}</p> : <p></p>}

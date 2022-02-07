@@ -2,10 +2,15 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import { createUser } from "../api/api";
+import { createUser, login } from "../api/api";
 import { authAtom } from "../state/auth";
+import BigButton from "./bigButton";
 
-function CreateUserComponent(): JSX.Element {
+interface CreateUserComponentProps {
+  login: boolean;
+}
+
+function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
   const setAuth = useSetRecoilState(authAtom);
   const router = useRouter();
   const {
@@ -16,17 +21,29 @@ function CreateUserComponent(): JSX.Element {
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
-    createUser(data.email, data.password, data.name)
-      .then((response) =>
+    if (signIn.login) {
+      login(data.email, data.password).then((response) =>
         setAuth({
           token: response.jwtToken,
           user: response.username,
           refresh: response.refreshToken,
         })
-      )
-      .catch(() => {});
-    reset();
-    router.push("/");
+      );
+      router.push("/");
+      reset();
+    } else {
+      createUser(data.email, data.password, data.name)
+        .then((response) =>
+          setAuth({
+            token: response.jwtToken,
+            user: response.username,
+            refresh: response.refreshToken,
+          })
+        )
+        .catch(() => {});
+      reset();
+      router.push("/");
+    }
   };
   return (
     <form
@@ -61,17 +78,22 @@ function CreateUserComponent(): JSX.Element {
         type="password"
       />
       {errors.password && <span role="alert">{errors.password.message}</span>}
-      <label htmlFor="name">name</label>
-      <input
-        className="text-black"
-        id="name"
-        {...register("name", {
-          required: "required",
-        })}
-        type="text"
-      />
-      {errors.name && <span role="alert">{errors.name.message}</span>}
-      <button type="submit">SUBMIT</button>
+      {!signIn.login ? (
+        <div>
+          <label htmlFor="name">name</label>
+          <input
+            className="text-black"
+            id="name"
+            {...register("name", {
+              required: "required",
+            })}
+            type="text"
+          />
+          {errors.name && <span role="alert">{errors.name.message}</span>}
+        </div>
+      ) : null}
+
+      <BigButton type="submit" text="Submit" onClick={() => {}}></BigButton>
     </form>
   );
 }
