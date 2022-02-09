@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import * as React from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { createUser, login } from "../api/api";
@@ -12,6 +13,7 @@ interface CreateUserComponentProps {
 
 function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
   const setAuth = useSetRecoilState(authAtom);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -21,30 +23,43 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
+    setLoading(true);
     if (signIn.login) {
-      login(data.email, data.password).then((response) =>
-        setAuth({
-          token: response.jwtToken,
-          user: response.username,
-          refresh: response.refreshToken,
-        })
-      );
-      router.push("/");
-      reset();
-    } else {
-      createUser(data.email, data.password, data.name)
-        .then((response) =>
+      login(data.email, data.password)
+        .then((response) => {
           setAuth({
             token: response.jwtToken,
             user: response.username,
             refresh: response.refreshToken,
-          })
-        )
-        .catch(() => {});
+          });
+          setLoading(false);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+      router.push("/");
+      reset();
+    } else {
+      createUser(data.email, data.password, data.name)
+        .then((response) => {
+          setAuth({
+            token: response.jwtToken,
+            user: response.username,
+            refresh: response.refreshToken,
+          });
+          setLoading(false);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
       reset();
       router.push("/");
     }
   };
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

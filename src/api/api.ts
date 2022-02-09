@@ -29,7 +29,7 @@ function fetchJSONWithToken(url: string, options = {}) {
     });
   } else {
     const rToken = retrieveRefreshToken();
-    if (!rToken) {
+    if (rToken) {
       refreshToken();
     }
   }
@@ -124,6 +124,7 @@ const refreshToken = async () => {
   } catch (error) {
     // Clear token and continue with the Promise catch chain
     clearToken();
+    clearRefreshToken();
     throw error;
   }
 };
