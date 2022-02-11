@@ -3,6 +3,7 @@ import merge from "lodash/merge";
 import Cookies from "js-cookie";
 import { configureRefreshFetch, fetchJSON } from "refresh-fetch";
 import TodoList from "../model/todolist";
+import router from "next/router";
 
 const COOKIE_NAME = "thaudal-token";
 const REFRESH_COOKIE_NAME = "refreshToken";
@@ -31,6 +32,9 @@ function fetchJSONWithToken(url: string, options = {}) {
     const rToken = retrieveRefreshToken();
     if (rToken) {
       refreshToken();
+    } else {
+      router.push("/login");
+      return;
     }
   }
 

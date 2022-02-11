@@ -27,18 +27,22 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
     if (signIn.login) {
       login(data.email, data.password)
         .then((response) => {
+          if (!response.jwtToken || !response.username) {
+            throw new Error("Invalid credentials");
+          }
+
           setAuth({
             token: response.jwtToken,
             user: response.username,
             refresh: response.refreshToken,
           });
           setLoading(false);
+          router.push("/");
         })
         .catch((err) => {
           throw new Error(err);
         });
-      router.push("/");
-      reset();
+      //reset();
     } else {
       createUser(data.email, data.password, data.name)
         .then((response) => {
@@ -48,12 +52,12 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
             refresh: response.refreshToken,
           });
           setLoading(false);
+          router.push("/");
         })
         .catch((err) => {
           throw new Error(err);
         });
-      reset();
-      router.push("/");
+      // reset();
     }
   };
 
