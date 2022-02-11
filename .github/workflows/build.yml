@@ -6,8 +6,7 @@ name: Build app
 on:
   push:
     branches:
-      - feature
-      - feature/*
+      - feat
   workflow_dispatch:
 
 jobs:
