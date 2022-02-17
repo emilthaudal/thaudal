@@ -6,6 +6,7 @@ import { useSetRecoilState } from "recoil";
 import { createUser, login } from "../api/api";
 import { authAtom } from "../state/auth";
 import BigButton from "./bigButton";
+import Card from "./card";
 
 interface CreateUserComponentProps {
   login: boolean;
@@ -65,55 +66,61 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
     return <div>Loading</div>;
   }
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-column m-4 p-6 space-x-4 space-y-4"
-    >
-      <label htmlFor="email">email</label>
-      <input
-        className="text-black"
-        id="email"
-        {...register("email", {
-          required: "required",
-          pattern: {
-            value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format",
-          },
-        })}
-        type="email"
-      />
-      {errors.email && <span role="alert">{errors.email.message}</span>}
-      <label htmlFor="password">password</label>
-      <input
-        className="text-black"
-        id="password"
-        {...register("password", {
-          required: "required",
-          minLength: {
-            value: 5,
-            message: "min length is 5",
-          },
-        })}
-        type="password"
-      />
-      {errors.password && <span role="alert">{errors.password.message}</span>}
-      {!signIn.login ? (
-        <div>
-          <label htmlFor="name">name</label>
+    <Card>
+      <div className="flex flex-col">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col m-4 p-6 space-y-4"
+        >
+          <label htmlFor="email">email</label>
           <input
             className="text-black"
-            id="name"
-            {...register("name", {
+            id="email"
+            {...register("email", {
               required: "required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Entered value does not match email format",
+              },
             })}
-            type="text"
+            type="email"
           />
-          {errors.name && <span role="alert">{errors.name.message}</span>}
-        </div>
-      ) : null}
+          {errors.email && <span role="alert">{errors.email.message}</span>}
+          <label htmlFor="password">password</label>
+          <input
+            className="text-black"
+            id="password"
+            {...register("password", {
+              required: "required",
+              minLength: {
+                value: 5,
+                message: "min length is 5",
+              },
+            })}
+            type="password"
+          />
+          {errors.password && (
+            <span role="alert">{errors.password.message}</span>
+          )}
+          {!signIn.login ? (
+            <div>
+              <label htmlFor="name">name</label>
+              <input
+                className="text-black"
+                id="name"
+                {...register("name", {
+                  required: "required",
+                })}
+                type="text"
+              />
+              {errors.name && <span role="alert">{errors.name.message}</span>}
+            </div>
+          ) : null}
 
-      <BigButton type="submit" text="Submit" onClick={() => {}}></BigButton>
-    </form>
+          <BigButton type="submit" text="Submit" onClick={() => {}}></BigButton>
+        </form>
+      </div>
+    </Card>
   );
 }
 export default CreateUserComponent;
