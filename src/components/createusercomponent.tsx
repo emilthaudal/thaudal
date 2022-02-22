@@ -43,7 +43,6 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
         .catch((err) => {
           throw new Error(err);
         });
-      //reset();
     } else {
       createUser(data.email, data.password, data.name)
         .then((response) => {
@@ -58,7 +57,6 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
         .catch((err) => {
           throw new Error(err);
         });
-      // reset();
     }
   };
 
