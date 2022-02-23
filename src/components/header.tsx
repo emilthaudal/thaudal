@@ -42,6 +42,11 @@ function Header(): JSX.Element {
                 <a>TodoLists</a>
               </Link>
             </li>
+            <li className="mx-2 hover:text-emerald-500">
+              <Link href="/pointshare/pointshare">
+                <a>PointShare</a>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="self-end">
