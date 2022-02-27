@@ -1,5 +1,5 @@
 export default interface AuthResponse {
-  token: string;
-  username: string;
-  name: string;
+  jwtToken: string;
+  id: string;
+  refreshToken: string;
 }

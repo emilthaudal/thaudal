@@ -13,7 +13,7 @@ function Login(): JSX.Element {
   const [auth, setAuth] = useRecoilState(authAtom);
 
   React.useEffect(() => {
-    if (auth.user) router.push("/");
+    if (auth.user != "") router.push("/");
     else if (auth.refresh) {
       setIsLoading(true);
       refreshToken()

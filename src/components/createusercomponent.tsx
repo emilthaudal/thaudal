@@ -28,13 +28,13 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
     if (signIn.login) {
       login(data.email, data.password)
         .then((response) => {
-          if (!response.jwtToken || !response.username) {
+          if (!response?.jwtToken || !response?.id) {
             throw new Error("Invalid credentials");
           }
 
           setAuth({
             token: response.jwtToken,
-            user: response.username,
+            user: response.id,
             refresh: response.refreshToken,
           });
           setLoading(false);
@@ -48,7 +48,7 @@ function CreateUserComponent(signIn: CreateUserComponentProps): JSX.Element {
         .then((response) => {
           setAuth({
             token: response.jwtToken,
-            user: response.username,
+            user: response.id,
             refresh: response.refreshToken,
           });
           setLoading(false);

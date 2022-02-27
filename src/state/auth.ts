@@ -6,7 +6,7 @@ const authAtom = atom({
   // get initial state from local storage to enable user to stay logged in
   default: {
     token: retrieveToken(),
-    user: undefined,
+    user: "",
     refresh: retrieveRefreshToken(),
   },
 });

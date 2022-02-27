@@ -12,7 +12,7 @@ function Header(): JSX.Element {
     logout().then(() => {
       setAuth({
         token: undefined,
-        user: undefined,
+        user: "",
         refresh: undefined,
       });
     });
@@ -51,7 +51,7 @@ function Header(): JSX.Element {
         </div>
         <div className="self-end">
           <ul className="flex items-center p-6 container mx-auto">
-            {!auth.user ? (
+            {auth.user == "" ? (
               <li className="mx-2 hover:text-emerald-500">
                 <Link href="/login">Login</Link>
               </li>
