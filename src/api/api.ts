@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { configureRefreshFetch, fetchJSON } from "refresh-fetch";
 import TodoList from "../model/todolist";
 import router from "next/router";
+import AuthResponse from "../model/authresponse";
 
 const COOKIE_NAME = "thaudal-token";
 const REFRESH_COOKIE_NAME = "refreshToken";
@@ -50,9 +51,13 @@ async function login(email: string, password: string) {
         Password: password,
       }),
     });
-    saveToken(response.body.jwtToken);
-    saveRefreshToken(response.body.refreshToken);
-    return response.body;
+    var responseBody: AuthResponse = response.body;
+    if (!responseBody) {
+      throw new Error("Invalid response from server");
+    }
+    saveToken(responseBody.jwtToken);
+    saveRefreshToken(responseBody.refreshToken);
+    return responseBody;
   } catch (error) {}
 }
 

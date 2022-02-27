@@ -11,7 +11,7 @@ export default function Home(): JSX.Element {
   const [auth, setAuth] = useRecoilState(authAtom);
 
   React.useEffect(() => {
-    if (auth.user) return;
+    if (auth.user != "") return;
     else if (auth.refresh) {
       refreshToken()
         .then((response) => {
