@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "thaudal",
+  "project_id": "013fec22-c606-4fe7-80ea-13ff5b7cfa14"
+}
