@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { Nav } from "@/components/nav"
+import { GithubActivity } from "@/components/github-activity"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -339,6 +340,14 @@ export default function Home() {
                 <ProjectCard key={project.name} {...project} />
               ))}
             </div>
+          </section>
+
+          {/* ── Activity ── */}
+          <section id="activity">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
+              Activity
+            </p>
+            <GithubActivity />
           </section>
 
           {/* ── Contact ── */}
