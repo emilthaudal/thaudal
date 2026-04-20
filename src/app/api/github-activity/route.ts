@@ -36,6 +36,8 @@ async function fetchContributions(
   from: string,
   to: string
 ): Promise<ContributionDay[][]> {
+  console.log(`[github-activity] fetching contributions for ${login}`)
+
   const res = await fetch(GRAPHQL_URL, {
     method: "POST",
     headers: {
@@ -49,13 +51,18 @@ async function fetchContributions(
     next: { revalidate: 3600 },
   })
 
+  console.log(`[github-activity] ${login} HTTP status: ${res.status}`)
+
   if (!res.ok) {
+    const body = await res.text()
+    console.error(`[github-activity] ${login} error body: ${body}`)
     throw new Error(`GitHub GraphQL error for ${login}: ${res.status}`)
   }
 
   const json = await res.json()
 
   if (json.errors) {
+    console.error(`[github-activity] ${login} GraphQL errors:`, JSON.stringify(json.errors))
     throw new Error(
       `GitHub GraphQL errors for ${login}: ${JSON.stringify(json.errors)}`
     )
@@ -63,6 +70,12 @@ async function fetchContributions(
 
   const weeks: { contributionDays: { date: string; contributionCount: number }[] }[] =
     json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? []
+
+  const total = weeks.reduce(
+    (sum, w) => sum + w.contributionDays.reduce((s, d) => s + d.contributionCount, 0),
+    0
+  )
+  console.log(`[github-activity] ${login} weeks: ${weeks.length}, total contributions: ${total}`)
 
   return weeks.map((week) =>
     week.contributionDays.map((day) => ({
@@ -101,6 +114,8 @@ export async function GET() {
   const personalToken = process.env.GITHUB_TOKEN_PERSONAL
   const workToken = process.env.GITHUB_TOKEN_WORK
 
+  console.log(`[github-activity] personal token present: ${!!personalToken}, work token present: ${!!workToken}`)
+
   if (!personalToken && !workToken) {
     return NextResponse.json(
       { error: "No GitHub tokens configured" },
@@ -130,6 +145,8 @@ export async function GET() {
     const total = weeks
       .flat()
       .reduce((sum, day) => sum + day.count, 0)
+
+    console.log(`[github-activity] merged total: ${total}, personal weeks: ${personalWeeks.length}, work weeks: ${workWeeks.length}`)
 
     const response: ActivityResponse = { weeks, total }
 
