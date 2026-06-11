@@ -98,11 +98,11 @@ const projects = [
     tags: ["Swift", "iOS", "HealthKit"],
   },
   {
-    name: "WoW Addons",
+    name: "Drivetrain",
     description:
-      "A collection of World of Warcraft addons — UI tweaks, cooldown tracking, and Resto Druid healing tooling. Lua-based and thoroughly over-engineered.",
-    url: "https://github.com/emilthaudal",
-    tags: ["Lua", "World of Warcraft"],
+      "Bicycle maintenance and component wear tracker. Logs service intervals, mileage, and part replacement schedules so nothing on the bike is a surprise. Built in Rust.",
+    url: "https://github.com/emilthaudal/drivetrain",
+    tags: ["Rust", "Clerk", "sqlx"],
   },
 ]
 
@@ -261,7 +261,7 @@ export default function Home() {
               <p className="text-lg sm:text-xl text-muted-foreground mt-6 max-w-xl leading-relaxed">
                 Backend engineer building event-driven systems, cloud migrations,
                 and payment infrastructure.{" "}
-                <span className="text-foreground">Based in Aalborg, Denmark.</span>
+                <span className="text-foreground">Based in Ugelbølle, Denmark.</span>
               </p>
 
               {/* Links */}
@@ -391,7 +391,7 @@ export default function Home() {
             © {new Date().getFullYear()} Emil Thaudal Bønnerup
           </span>
           <span className="text-xs text-muted-foreground">
-            Aalborg, Denmark
+            Ugelbølle, Denmark
           </span>
         </div>
       </footer>

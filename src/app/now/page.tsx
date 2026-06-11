@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "What I'm currently working on, building, and thinking about.",
 }
 
-const LAST_UPDATED = "April 2026"
+const LAST_UPDATED = "June 2026"
 
 export default function NowPage() {
   return (
@@ -88,28 +88,66 @@ export default function NowPage() {
               Side projects
             </p>
 
-            <div>
-              <div className="flex items-baseline gap-3 mb-3">
-                <h2 className="font-heading text-2xl font-semibold">Relay</h2>
-                <Link
-                  href="https://github.com/emilthaudal/Relay"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  GitHub ↗
-                </Link>
+            <div className="space-y-10">
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <h2 className="font-heading text-2xl font-semibold">Drivetrain</h2>
+                  <Link
+                    href="https://github.com/emilthaudal/drivetrain"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    GitHub ↗
+                  </Link>
+                </div>
+                <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  <p>
+                    A bicycle maintenance and component wear tracker. The
+                    problem it solves is simple: I forget when I last replaced
+                    a chain, serviced the suspension, or swapped brake pads —
+                    and I want the app to tell me before the bike tells me in a
+                    less pleasant way.
+                  </p>
+                  <p>
+                    Built in Rust, which I&apos;m using as an excuse to get
+                    comfortable with the language on a real project rather than
+                    toy exercises. Auth is handled by Clerk, and persistence is
+                    sqlx with compile-time query verification — the
+                    &ldquo;your SQL is wrong&rdquo; errors happen at{" "}
+                    <code className="text-xs font-mono">cargo build</code>, not
+                    at runtime.
+                  </p>
+                  <p className="text-foreground/60 italic">
+                    Currently building out the core service interval and
+                    mileage tracking logic.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
-                <p>
-                  An iOS app that syncs workouts across HealthKit, Strava, and
-                  Intervals.icu — deduplicating as it goes so you don&apos;t end
-                  up with the same run logged three times. Written in Swift.
-                </p>
-                <p className="text-foreground/60 italic">
-                  Currently on the backburner while the Whiteaway work is
-                  intense, but I&apos;m keeping it maintained.
-                </p>
+
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <h2 className="font-heading text-2xl font-semibold">Relay</h2>
+                  <Link
+                    href="https://github.com/emilthaudal/Relay"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    GitHub ↗
+                  </Link>
+                </div>
+                <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  <p>
+                    An iOS app that syncs workouts across HealthKit, Strava, and
+                    Intervals.icu — deduplicating as it goes so you don&apos;t end
+                    up with the same run logged three times. Written in Swift.
+                  </p>
+                  <p className="text-foreground/60 italic">
+                    Currently on the backburner while the Whiteaway work is
+                    intense, but I&apos;m keeping it maintained.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -140,7 +178,7 @@ export default function NowPage() {
           >
             ← Back
           </Link>
-          <span className="text-xs text-muted-foreground">Aalborg, Denmark</span>
+          <span className="text-xs text-muted-foreground">Ugelbølle, Denmark</span>
         </div>
       </footer>
     </>
