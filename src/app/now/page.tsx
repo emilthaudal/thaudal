@@ -93,12 +93,20 @@ export default function NowPage() {
                 <div className="flex items-baseline gap-3 mb-3">
                   <h2 className="font-heading text-2xl font-semibold">Drivetrain</h2>
                   <Link
-                    href="https://github.com/emilthaudal/drivetrain"
+                    href="https://github.com/emilthaudal/drivetrain-api"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    GitHub ↗
+                    API ↗
+                  </Link>
+                  <Link
+                    href="https://github.com/emilthaudal/drivetrain-web"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Web ↗
                   </Link>
                 </div>
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
@@ -110,17 +118,23 @@ export default function NowPage() {
                     less pleasant way.
                   </p>
                   <p>
-                    Built in Rust, which I&apos;m using as an excuse to get
-                    comfortable with the language on a real project rather than
-                    toy exercises. Auth is handled by Clerk, and persistence is
-                    sqlx with compile-time query verification — the
-                    &ldquo;your SQL is wrong&rdquo; errors happen at{" "}
+                    The interesting part is how it calculates wear. Rather than
+                    just counting kilometres, it pulls ride data from Strava
+                    and Intervals.icu and cross-references it with weather —
+                    a wet or snowy ride wears a drivetrain significantly faster
+                    than a dry one, so the wear model weights conditions
+                    accordingly. The goal is predictions you can actually trust.
+                  </p>
+                  <p>
+                    Split into an API (Rust) and a web frontend. Auth is Clerk,
+                    persistence is sqlx with compile-time query verification —
+                    SQL errors surface at{" "}
                     <code className="text-xs font-mono">cargo build</code>, not
                     at runtime.
                   </p>
                   <p className="text-foreground/60 italic">
-                    Currently building out the core service interval and
-                    mileage tracking logic.
+                    Currently wiring up the Strava and Intervals.icu ingestion
+                    and the weather-adjusted wear model.
                   </p>
                 </div>
               </div>
