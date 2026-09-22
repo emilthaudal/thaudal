@@ -25,7 +25,7 @@ export function Nav() {
   useEffect(() => {
     setMounted(true)
     const onScroll = () => setScrolled(window.scrollY > 10)
-    window.addEventListener("scroll", onScroll)
+    window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 

@@ -1,165 +1,19 @@
 import { NextResponse } from "next/server"
-
-const GRAPHQL_URL = "https://api.github.com/graphql"
-
-const CONTRIBUTION_QUERY = `
-  query($login: String!, $from: DateTime!, $to: DateTime!) {
-    user(login: $login) {
-      contributionsCollection(from: $from, to: $to) {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              date
-              contributionCount
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-export type ContributionDay = {
-  date: string
-  count: number
-}
-
-export type ActivityResponse = {
-  weeks: ContributionDay[][]
-  total: number
-}
-
-async function fetchContributions(
-  login: string,
-  token: string,
-  from: string,
-  to: string
-): Promise<ContributionDay[][]> {
-  console.log(`[github-activity] fetching contributions for ${login}`)
-
-  const res = await fetch(GRAPHQL_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: CONTRIBUTION_QUERY,
-      variables: { login, from, to },
-    }),
-    next: { revalidate: 3600 },
-  })
-
-  console.log(`[github-activity] ${login} HTTP status: ${res.status}`)
-
-  if (!res.ok) {
-    const body = await res.text()
-    console.error(`[github-activity] ${login} error body: ${body}`)
-    throw new Error(`GitHub GraphQL error for ${login}: ${res.status}`)
-  }
-
-  const json = await res.json()
-
-  if (json.errors) {
-    console.error(`[github-activity] ${login} GraphQL errors:`, JSON.stringify(json.errors))
-    throw new Error(
-      `GitHub GraphQL errors for ${login}: ${JSON.stringify(json.errors)}`
-    )
-  }
-
-  const weeks: { contributionDays: { date: string; contributionCount: number }[] }[] =
-    json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? []
-
-  const total = weeks.reduce(
-    (sum, w) => sum + w.contributionDays.reduce((s, d) => s + d.contributionCount, 0),
-    0
-  )
-  console.log(`[github-activity] ${login} weeks: ${weeks.length}, total contributions: ${total}`)
-
-  return weeks.map((week) =>
-    week.contributionDays.map((day) => ({
-      date: day.date,
-      count: day.contributionCount,
-    }))
-  )
-}
-
-function mergeWeeks(
-  a: ContributionDay[][],
-  b: ContributionDay[][]
-): ContributionDay[][] {
-  // Use the longer array as base and merge counts by date
-  const map = new Map<string, number>()
-
-  for (const weeks of [a, b]) {
-    for (const week of weeks) {
-      for (const day of week) {
-        map.set(day.date, (map.get(day.date) ?? 0) + day.count)
-      }
-    }
-  }
-
-  // Reconstruct using structure of array a (or b if a is empty)
-  const base = a.length > 0 ? a : b
-  return base.map((week) =>
-    week.map((day) => ({
-      date: day.date,
-      count: map.get(day.date) ?? 0,
-    }))
-  )
-}
+import { getGithubActivity } from "@/lib/github-activity"
 
 export async function GET() {
-  const personalToken = process.env.GITHUB_TOKEN_PERSONAL
-  const workToken = process.env.GITHUB_TOKEN_WORK
+  const data = await getGithubActivity()
 
-  console.log(`[github-activity] personal token present: ${!!personalToken}, work token present: ${!!workToken}`)
-
-  if (!personalToken && !workToken) {
-    return NextResponse.json(
-      { error: "No GitHub tokens configured" },
-      { status: 500 }
-    )
-  }
-
-  // Last 52 weeks
-  const to = new Date()
-  const from = new Date()
-  from.setFullYear(from.getFullYear() - 1)
-
-  const fromISO = from.toISOString()
-  const toISO = to.toISOString()
-
-  try {
-    const [personalWeeks, workWeeks] = await Promise.all([
-      personalToken
-        ? fetchContributions("emilthaudal", personalToken, fromISO, toISO)
-        : Promise.resolve([]),
-      workToken
-        ? fetchContributions("emilthaudalwg", workToken, fromISO, toISO)
-        : Promise.resolve([]),
-    ])
-
-    const weeks = mergeWeeks(personalWeeks, workWeeks)
-    const total = weeks
-      .flat()
-      .reduce((sum, day) => sum + day.count, 0)
-
-    console.log(`[github-activity] merged total: ${total}, personal weeks: ${personalWeeks.length}, work weeks: ${workWeeks.length}`)
-
-    const response: ActivityResponse = { weeks, total }
-
-    return NextResponse.json(response, {
-      headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-      },
-    })
-  } catch (err) {
-    console.error("GitHub activity fetch failed:", err)
+  if (!data) {
     return NextResponse.json(
       { error: "Failed to fetch GitHub activity" },
       { status: 500 }
     )
   }
+
+  return NextResponse.json(data, {
+    headers: {
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    },
+  })
 }

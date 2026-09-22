@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import type { ActivityResponse, ContributionDay } from "@/app/api/github-activity/route"
+import { useState } from "react"
+import type { ActivityResponse, ContributionDay } from "@/lib/github-activity"
 
 // ── Colour levels ──────────────────────────────────────────────────────────────
 // Thresholds scale to the busiest day in the dataset, so a quiet year and a
@@ -76,33 +76,12 @@ function getMonthLabels(
 const DOW_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""]
 
 // ── Main component ─────────────────────────────────────────────────────────────
+// Data is fetched server-side and passed in as a prop — this component only
+// owns the tooltip hover state, so there's no client fetch waterfall or
+// loading skeleton on first paint.
 
-export function GithubActivity() {
-  const [data, setData] = useState<ActivityResponse | null>(null)
-  const [error, setError] = useState(false)
+export function ActivityGrid({ data }: { data: ActivityResponse }) {
   const [tooltip, setTooltip] = useState<TooltipInfo | null>(null)
-
-  useEffect(() => {
-    fetch("/api/github-activity")
-      .then((r) => {
-        if (!r.ok) throw new Error("Failed")
-        return r.json() as Promise<ActivityResponse>
-      })
-      .then(setData)
-      .catch(() => setError(true))
-  }, [])
-
-  if (error) {
-    return (
-      <p className="text-sm text-muted-foreground">
-        Activity unavailable right now.
-      </p>
-    )
-  }
-
-  if (!data) {
-    return <ActivitySkeleton />
-  }
 
   const numWeeks = data.weeks.length
   const monthLabels = getMonthLabels(data.weeks)
@@ -232,35 +211,6 @@ export function GithubActivity() {
           </div>
         </div>
       )}
-    </div>
-  )
-}
-
-// ── Loading skeleton ──────────────────────────────────────────────────────────
-
-function ActivitySkeleton() {
-  return (
-    <div className="space-y-3 animate-pulse w-full">
-      <div className="h-4 w-52 bg-muted rounded" />
-      <div className="flex gap-1 w-full">
-        <div className="shrink-0 w-7" />
-        <div
-          className="grid flex-1"
-          style={{ gridTemplateColumns: "repeat(53, 1fr)", gap: "3px" }}
-        >
-          {Array.from({ length: 53 }).map((_, wi) => (
-            <div
-              key={wi}
-              className="grid"
-              style={{ gridTemplateRows: "repeat(7, 1fr)", gap: "3px" }}
-            >
-              {Array.from({ length: 7 }).map((_, di) => (
-                <div key={di} className="rounded-[2px] aspect-square bg-foreground/[0.06]" />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }
