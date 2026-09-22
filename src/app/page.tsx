@@ -51,9 +51,9 @@ const work = [
   {
     company: "Whiteaway",
     period: "2024 — now",
-    role: "Backend Engineer",
+    role: "Tech Lead & Senior Engineer",
     description:
-      "Migrating the fulfillment pipeline off legacy Navision onto a cloud-native event-driven architecture. Replacing a monolithic ERP integration with domain-owned event streams and async processing.",
+      "Migrating the fulfillment pipeline off legacy Navision onto a cloud-native event-driven architecture, split across several 2-3 person teams. Working with our architect and project owner to break business capabilities into scoped team work, and rolling out agentic development (Claude Code) across the engineering department.",
   },
   {
     company: "Lunar",

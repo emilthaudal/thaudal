@@ -4,12 +4,16 @@ import { useEffect, useRef, useState } from "react"
 import type { ActivityResponse, ContributionDay } from "@/app/api/github-activity/route"
 
 // ── Colour levels ──────────────────────────────────────────────────────────────
+// Thresholds scale to the busiest day in the dataset, so a quiet year and a
+// blisteringly productive one both use the full colour range.
 
-function levelForCount(count: number): 0 | 1 | 2 | 3 | 4 {
+function levelForCount(count: number, maxCount: number): 0 | 1 | 2 | 3 | 4 {
   if (count === 0) return 0
-  if (count <= 2) return 1
-  if (count <= 5) return 2
-  if (count <= 9) return 3
+  if (maxCount <= 0) return 0
+  const ratio = count / maxCount
+  if (ratio <= 0.25) return 1
+  if (ratio <= 0.5) return 2
+  if (ratio <= 0.75) return 3
   return 4
 }
 
@@ -102,6 +106,7 @@ export function GithubActivity() {
 
   const numWeeks = data.weeks.length
   const monthLabels = getMonthLabels(data.weeks)
+  const maxCount = Math.max(0, ...data.weeks.flat().map((day) => day.count))
 
   return (
     <div className="space-y-3 w-full">
@@ -177,7 +182,7 @@ export function GithubActivity() {
                   }}
                 >
                   {week.map((day) => {
-                    const level = levelForCount(day.count)
+                    const level = levelForCount(day.count, maxCount)
                     return (
                       <div
                         key={day.date}

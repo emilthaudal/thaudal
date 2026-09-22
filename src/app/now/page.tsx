@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "What I'm currently working on, building, and thinking about.",
 }
 
-const LAST_UPDATED = "June 2026"
+const LAST_UPDATED = "September 2026"
 
 export default function NowPage() {
   return (
@@ -70,10 +70,55 @@ export default function NowPage() {
                     incremental migration so we don&apos;t stop orders moving
                     while we rebuild the rails under them.
                   </p>
+                  <p>
+                    We&apos;re now ramping this up: more of the ERP is coming
+                    apart, split across several 2-3 person teams working in
+                    parallel on separate domains. A growing part of my role
+                    is working alongside our architect and project owner to
+                    take business capabilities and requirements and break
+                    them down into scoped, dependency-aware work each team
+                    can actually pick up and run with.
+                  </p>
                   <p className="text-foreground/60 italic">
                     Current focus: event schema design and the first domain
                     extraction — getting order lifecycle events flowing
-                    independently of the ERP write path.
+                    independently of the ERP write path — plus shaping the
+                    team-level breakdown for the next wave of extractions.
+                  </p>
+                </div>
+              </div>
+
+              {/* Agentic engineering rollout */}
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <h2 className="font-heading text-2xl font-semibold">
+                    Whiteaway — Agentic Engineering Rollout
+                  </h2>
+                  <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                    2026 — now
+                  </span>
+                </div>
+                <div className="space-y-4 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  <p>
+                    I&apos;ve spent the last while working heavily with Claude
+                    and Claude Code, and I&apos;m now responsible for rolling
+                    that out across the engineering department — not just
+                    picking a tool, but building the practices around it:
+                    how to scope work so an agent can run it well, how to
+                    review agent-written changes properly, and where the
+                    approach actually pays off versus where it doesn&apos;t.
+                  </p>
+                  <p>
+                    The goal is to lift the whole department&apos;s
+                    productivity and quality, not just my own — pairing
+                    directly with other engineers on real tasks, writing up
+                    what works, and folding the lessons back into how the
+                    ERP migration teams operate day to day.
+                  </p>
+                  <p className="text-foreground/60 italic">
+                    Current focus: onboarding the first few engineers 1:1 and
+                    turning what I&apos;ve learned into repeatable practice
+                    rather than a habit that lives only in my own workflow.
                   </p>
                 </div>
               </div>
