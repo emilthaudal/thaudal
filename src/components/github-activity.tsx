@@ -17,14 +17,14 @@ function levelForCount(count: number, maxCount: number): 0 | 1 | 2 | 3 | 4 {
   return 4
 }
 
-// Empty cells: near-transparent so the grid structure is visible but not heavy.
-// Active levels: consistent green scale that works in both light and dark mode.
+// Monochrome ink scale off the foreground colour, so the grid matches the rest
+// of the site and flips with the theme without per-mode overrides.
 const LEVEL_CLASSES: Record<0 | 1 | 2 | 3 | 4, string> = {
   0: "bg-foreground/[0.06]",
-  1: "bg-emerald-800/50 dark:bg-emerald-700/50",
-  2: "bg-emerald-600/70 dark:bg-emerald-500/65",
-  3: "bg-emerald-500/85 dark:bg-emerald-400/80",
-  4: "bg-emerald-500 dark:bg-emerald-400",
+  1: "bg-foreground/20",
+  2: "bg-foreground/40",
+  3: "bg-foreground/65",
+  4: "bg-foreground/90",
 }
 
 // ── Tooltip state ──────────────────────────────────────────────────────────────

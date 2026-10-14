@@ -10,9 +10,7 @@ import { cn } from "@/lib/utils"
 const navLinks = [
   { href: "/#agentic", label: "Agentic" },
   { href: "/#work", label: "Work" },
-  { href: "/#stack", label: "Stack" },
   { href: "/#projects", label: "Projects" },
-  { href: "/#activity", label: "Activity" },
   { href: "/now", label: "Now" },
   { href: "/#contact", label: "Contact" },
 ]
@@ -43,18 +41,18 @@ export function Nav() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-heading text-sm font-semibold uppercase tracking-widest hover:opacity-70 transition-opacity"
+          className="font-heading text-lg font-semibold hover:opacity-70 transition-opacity"
         >
           ETB
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
@@ -105,7 +103,7 @@ export function Nav() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors py-1"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
               >
                 {link.label}
               </Link>

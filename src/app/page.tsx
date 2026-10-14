@@ -1,12 +1,15 @@
+import Link from "next/link"
 import { Nav } from "@/components/nav"
 import { Hero } from "@/components/hero"
-import { WorkCard } from "@/components/work-card"
 import { ActivityGrid } from "@/components/github-activity"
-import { GithubIcon } from "@/components/github-icon"
-import { LinkedinIcon } from "@/components/linkedin-icon"
-import { Badge } from "@/components/ui/badge"
-import { Mail, ExternalLink } from "lucide-react"
-import Link from "next/link"
+import {
+  Entry,
+  EntryList,
+  Footer,
+  Section,
+  bodyText,
+  textLink,
+} from "@/components/section"
 import { getGithubActivity } from "@/lib/github-activity"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -123,137 +126,23 @@ const projects = [
   },
 ]
 
-// ─── Components ───────────────────────────────────────────────────────────────
-// Static markup — no client state needed, so these stay server-rendered.
-
-function AgenticSection() {
-  return (
-    <div className="space-y-10">
-      <div className="space-y-4 text-muted-foreground leading-relaxed max-w-2xl">
-        <p className="text-lg text-foreground">
-          I work agent-first. I scope the work, agents implement it, and I
-          spend my time on review and on the harness that makes their output
-          safe to merge.
-        </p>
-        <p className="text-sm">
-          Agents are only as good as the task they&apos;re given and the checks
-          around them. So most of what I build is that layer: dependency-aware
-          task breakdown, isolated worktrees, independent review, guardrails on
-          dangerous commands, and evidence before anything is called done.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border border-border">
-        {agenticStats.map((stat) => (
-          <div key={stat.label} className="bg-background p-5">
-            <p className="font-heading text-3xl font-semibold tabular-nums">
-              {stat.value}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        {agenticWork.map((item) => {
-          const body = (
-            <>
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <span className="font-heading text-lg font-semibold">
-                  {item.title}
-                </span>
-                {item.url && (
-                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 mt-0.5" />
-                )}
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.description}
-              </p>
-            </>
-          )
-          return item.url ? (
-            <Link
-              key={item.title}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block border border-border p-6 hover:border-foreground/30 transition-colors duration-200"
-            >
-              {body}
-            </Link>
-          ) : (
-            <div key={item.title} className="border border-border p-6">
-              {body}
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-function StackSection() {
-  return (
-    <div className="grid gap-6 sm:grid-cols-2">
-      {Object.entries(stack).map(([category, items]) => (
-        <div key={category}>
-          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-            {category}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {items.map((item) => (
-              <Badge
-                key={item}
-                variant="secondary"
-                className="text-xs font-normal"
-              >
-                {item}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function ProjectCard({
-  name,
-  description,
-  url,
-  tags,
-}: (typeof projects)[number]) {
-  return (
-    <Link
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block border border-border p-6 hover:border-foreground/30 transition-colors duration-200"
-    >
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <span className="font-heading text-lg font-semibold">{name}</span>
-        <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 mt-0.5" />
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-        {description}
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {tags.map((tag) => (
-          <Badge key={tag} variant="outline" className="text-xs font-normal">
-            {tag}
-          </Badge>
-        ))}
-      </div>
-    </Link>
-  )
-}
+const contact = [
+  { label: "Email", href: "mailto:emil@thaudal.com", text: "emil@thaudal.com" },
+  {
+    label: "GitHub",
+    href: "https://github.com/emilthaudal",
+    text: "github.com/emilthaudal",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/emil-tb",
+    text: "linkedin.com/in/emil-tb",
+  },
+]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
-// Server Component: only the pieces that actually need interactivity (Hero's
-// typewriter/reveal, WorkCard's expand toggle, the activity grid's tooltip,
-// and Nav's theme/scroll state) ship as client JS. Everything else — the
-// work list, stack badges, project cards, contact section — renders once on
-// the server with no hydration cost.
+// Server Component: only Nav's theme/scroll state and the activity grid's
+// tooltip ship as client JS. Everything else renders once on the server.
 
 export default async function Home() {
   const activity = await getGithubActivity()
@@ -264,53 +153,92 @@ export default async function Home() {
       <main className="flex-1">
         <Hero />
 
-        <div className="max-w-4xl mx-auto px-6 space-y-24 pb-24">
-          {/* ── Agentic engineering ── */}
-          <section id="agentic">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Agentic engineering
-            </p>
-            <AgenticSection />
-          </section>
+        <div className="mx-auto max-w-4xl space-y-24 px-6 pb-32">
+          <Section id="agentic" label="agentic engineering">
+            <div className="max-w-2xl space-y-4">
+              <p className="text-xl leading-snug">
+                I work agent-first. I scope the work, agents implement it, and
+                I spend my time on review and on the harness that makes their
+                output safe to merge.
+              </p>
+              <p className={bodyText}>
+                Agents are only as good as the task they&apos;re given and the
+                checks around them. So most of what I build is that layer:
+                dependency-aware task breakdown, isolated worktrees,
+                independent review, guardrails on dangerous commands, and
+                evidence before anything is called done.
+              </p>
+            </div>
 
-          {/* ── Work ── */}
-          <section id="work">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Work
-            </p>
-            <div>
+            <dl className="my-10 grid grid-cols-2 gap-y-6 border-y border-border py-6 sm:grid-cols-4">
+              {agenticStats.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse justify-end gap-1 pr-4">
+                  <dt className="font-mono text-xs text-muted-foreground">
+                    {stat.label}
+                  </dt>
+                  <dd className="font-heading text-4xl font-semibold tabular-nums">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <EntryList>
+              {agenticWork.map((item) => (
+                <Entry key={item.title} title={item.title} href={item.url}>
+                  <p>{item.description}</p>
+                </Entry>
+              ))}
+            </EntryList>
+          </Section>
+
+          <Section id="work" label="work">
+            <EntryList>
               {work.map((job) => (
-                <WorkCard key={job.company} {...job} />
+                <Entry
+                  key={job.company}
+                  title={job.company}
+                  meta={job.period}
+                  subtitle={job.role}
+                >
+                  <p>{job.description}</p>
+                </Entry>
               ))}
-              <div className="border-t border-border" />
-            </div>
-          </section>
+            </EntryList>
+          </Section>
 
-          {/* ── Stack ── */}
-          <section id="stack">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Stack
-            </p>
-            <StackSection />
-          </section>
-
-          {/* ── Projects ── */}
-          <section id="projects">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Projects
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2">
+          <Section id="projects" label="projects">
+            <EntryList>
               {projects.map((project) => (
-                <ProjectCard key={project.name} {...project} />
+                <Entry
+                  key={project.name}
+                  title={project.name}
+                  href={project.url}
+                  tags={project.tags}
+                >
+                  <p>{project.description}</p>
+                </Entry>
               ))}
-            </div>
-          </section>
+            </EntryList>
+          </Section>
 
-          {/* ── Activity ── */}
-          <section id="activity">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Activity
-            </p>
+          <Section id="stack" label="stack">
+            <dl className="space-y-4">
+              {Object.entries(stack).map(([category, items]) => (
+                <div
+                  key={category}
+                  className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-4"
+                >
+                  <dt className="font-mono text-xs text-muted-foreground sm:pt-1">
+                    {category}
+                  </dt>
+                  <dd className={bodyText}>{items.join(" · ")}</dd>
+                </div>
+              ))}
+            </dl>
+          </Section>
+
+          <Section id="activity" label="activity">
             {activity ? (
               <ActivityGrid data={activity} />
             ) : (
@@ -318,62 +246,44 @@ export default async function Home() {
                 Activity unavailable right now.
               </p>
             )}
-          </section>
+          </Section>
 
-          {/* ── Contact ── */}
-          <section id="contact">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
-              Contact
+          <Section id="contact" label="contact">
+            <p className={`${bodyText} max-w-2xl`}>
+              I&apos;m always open to interesting conversations — about
+              agentic engineering, distributed systems, side projects, or
+              anything else.
             </p>
-            <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                I&apos;m always open to interesting conversations — about
-                agentic engineering, distributed systems, side projects, or
-                anything else.
-              </p>
-              <div className="flex flex-wrap gap-6 pt-4">
-                <Link
-                  href="mailto:emil@thaudal.com"
-                  className="text-sm flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            <dl className="mt-6 space-y-2">
+              {contact.map((item) => (
+                <div
+                  key={item.label}
+                  className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-4"
                 >
-                  <Mail className="h-4 w-4" />
-                  emil@thaudal.com
-                </Link>
-                <Link
-                  href="https://github.com/emilthaudal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <GithubIcon className="h-4 w-4" />
-                  github.com/emilthaudal
-                </Link>
-                <Link
-                  href="https://www.linkedin.com/in/emil-tb"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <LinkedinIcon className="h-4 w-4" />
-                  linkedin.com/in/emil-tb
-                </Link>
-              </div>
-            </div>
-          </section>
+                  <dt className="font-mono text-xs text-muted-foreground sm:pt-1">
+                    {item.label}
+                  </dt>
+                  <dd className="text-[15px]">
+                    <Link
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      className={textLink}
+                    >
+                      {item.text}
+                    </Link>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Section>
         </div>
       </main>
 
-      {/* ── Footer ── */}
-      <footer className="border-t border-border">
-        <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Emil Thaudal Bønnerup
-          </span>
-          <span className="text-xs text-muted-foreground">
-            Ugelbølle, Denmark
-          </span>
-        </div>
-      </footer>
+      <Footer>
+        <span>© {new Date().getFullYear()} Emil Thaudal Bønnerup</span>
+        <span>Ugelbølle, Denmark</span>
+      </Footer>
     </>
   )
 }
