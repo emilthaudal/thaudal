@@ -25,11 +25,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Emil Thaudal Bønnerup",
   description:
-    "Backend engineer building event-driven systems, cloud migrations, and payment infrastructure. Based in Aalborg, Denmark.",
+    "Tech lead and backend engineer working agent-first: event-driven systems, and the Claude Code tooling that lets agents ship them safely. Based in Ugelbølle, Denmark.",
   metadataBase: new URL("https://thaudal.com"),
   openGraph: {
     title: "Emil Thaudal Bønnerup",
-    description: "Backend engineer. Event-driven. Based in Aalborg.",
+    description:
+      "Tech lead. Agentic engineering with Claude Code. Event-driven backends.",
     url: "https://thaudal.com",
     siteName: "thaudal.com",
     locale: "en_US",
@@ -38,7 +39,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Emil Thaudal Bønnerup",
-    description: "Backend engineer. Event-driven. Based in Aalborg.",
+    description:
+      "Tech lead. Agentic engineering with Claude Code. Event-driven backends.",
     creator: "@emilthaudal",
   },
 };
