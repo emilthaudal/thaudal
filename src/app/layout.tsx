@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Noto_Sans, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const playfairDisplayHeading = Playfair_Display({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-heading",
-});
-
-const notoSans = Noto_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
 });
 
 const geistMono = Geist_Mono({
@@ -56,19 +50,21 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         "h-full antialiased",
-        notoSans.variable,
-        playfairDisplayHeading.variable,
+        geistSans.variable,
         geistMono.variable
       )}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full bg-background text-foreground">
+        {/* No theme toggle any more: always follow the OS. The new storage key
+            ignores a light/dark choice saved by the old toggle. */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          storageKey="theme-system"
         >
-          <TooltipProvider>{children}</TooltipProvider>
+          {children}
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
