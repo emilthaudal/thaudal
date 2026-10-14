@@ -88,7 +88,10 @@ export function ActivityGrid({ data }: { data: ActivityResponse }) {
   const maxCount = Math.max(0, ...data.weeks.flat().map((day) => day.count))
 
   return (
-    <div className="space-y-3 w-full">
+    // flex + gap, not space-y: Tailwind v4's space-y adds margin to every child
+    // but the last, so mounting the fixed tooltip as the new last child pushed
+    // the legend's margin out and shifted everything below on hover.
+    <div className="flex w-full flex-col gap-3">
       {/* Summary line */}
       <p className="text-sm text-muted-foreground">
         <span className="text-foreground font-medium tabular-nums">
