@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero"
 import { WorkCard } from "@/components/work-card"
 import { ActivityGrid } from "@/components/github-activity"
 import { GithubIcon } from "@/components/github-icon"
+import { LinkedinIcon } from "@/components/linkedin-icon"
 import { Badge } from "@/components/ui/badge"
 import { Mail, ExternalLink } from "lucide-react"
 import Link from "next/link"
@@ -16,7 +17,7 @@ const work = [
     period: "2024 — now",
     role: "Tech Lead & Senior Engineer",
     description:
-      "Migrating the fulfillment pipeline off legacy Navision onto a cloud-native event-driven architecture, split across several 2-3 person teams. Working with our architect and project owner to break business capabilities into scoped team work, and rolling out agentic development (Claude Code) across the engineering department.",
+      "Migrating the fulfillment pipeline off legacy Navision onto a cloud-native event-driven architecture, split across several 2-3 person teams. Working with our architect and project owner to break business capabilities into scoped team work. Working agent-first: 680+ merged PRs across ~50 services since April 2026, and I built our Claude Code plugin, now in pilot ahead of a department-wide rollout.",
   },
   {
     company: "Lunar",
@@ -41,8 +42,46 @@ const work = [
   },
 ]
 
+const agenticStats = [
+  { value: "680+", label: "merged PRs since April 2026" },
+  { value: "~50", label: "services shipped to" },
+  { value: "13", label: "skills in the team plugin" },
+  { value: "3", label: "agent CLIs it runs in" },
+]
+
+const agenticWork = [
+  {
+    title: "A Claude Code plugin for my team",
+    description:
+      "Skills for planning, implementing, verifying, fixing CI and investigating production, plus implementer and reviewer subagents. A guard hook blocks risky git and cloud operations, and every skill change has to pass an eval suite graded by an LLM judge. Runs in Claude Code, Copilot CLI and Codex.",
+  },
+  {
+    title: "From epic to green PRs",
+    description:
+      "Builds a task graph from ticket dependencies, runs implementer agents in parallel, each in its own git worktree, and gives every PR a reviewer with none of the author's context. New tickets start as soon as their blockers merge.",
+  },
+  {
+    title: "Multi-agent orchestration",
+    description:
+      "One coordinator session drives several worker sessions in terminal tabs: it starts them with a brief, tells me which ones need a decision, relays my answers and watches for completion.",
+  },
+  {
+    title: "Open-source Claude Code mods",
+    description:
+      "agent-progress shows running commands, context use, CI status and live multi-agent progress above the prompt. readable restyles the transcript, and gh-account picks the right GitHub account per repo.",
+    url: "https://github.com/emilthaudal/claude-plugins",
+  },
+]
+
 const stack = {
-  Languages: ["Java", "Go", "C#", "TypeScript", "Swift"],
+  Agentic: [
+    "Claude Code",
+    "Skills, hooks & subagents",
+    "MCP",
+    "LLM evals",
+    "Multi-agent orchestration",
+  ],
+  Languages: ["Java", "Go", "C#", "TypeScript", "Rust", "Swift"],
   Patterns: [
     "Event Sourcing",
     "CQRS",
@@ -52,7 +91,29 @@ const stack = {
   "Cloud / Infra": ["Azure", "Docker", "SharePoint", "Distributed Systems"],
 }
 
+// Every project here was built agent-first with Claude Code.
 const projects = [
+  {
+    name: "Claude Code mods",
+    description:
+      "My public Claude Code plugins: a live progress band for long and multi-agent runs, a readable transcript, and per-repo GitHub accounts. TypeScript, with tests.",
+    url: "https://github.com/emilthaudal/claude-plugins",
+    tags: ["Claude Code", "TypeScript", "Hooks"],
+  },
+  {
+    name: "Drivetrain",
+    description:
+      "Bicycle component wear tracker. Imports rides from Intervals.icu, adjusts wear for the weather, and warns before a part is worn out. Rust API and Next.js frontend, live on Railway.",
+    url: "https://drivetrain.thaudal.com",
+    tags: ["Rust", "Next.js", "Railway"],
+  },
+  {
+    name: "Hammi",
+    description:
+      "A Tamagotchi-style pet hamster I built for my wife in a week. It hatches, grows up over four days and gets hungry and sleepy in real time, with push notifications. Gentle by design: neglect only makes it sad.",
+    url: "https://github.com/emilthaudal/hammi",
+    tags: ["Rust", "React", "PWA"],
+  },
   {
     name: "Relay",
     description:
@@ -60,21 +121,80 @@ const projects = [
     url: "https://github.com/emilthaudal/Relay",
     tags: ["Swift", "iOS", "HealthKit"],
   },
-  {
-    name: "Drivetrain",
-    description:
-      "Bicycle maintenance and component wear tracker. Logs service intervals, mileage, and part replacement schedules so nothing on the bike is a surprise. Built in Rust.",
-    url: "https://github.com/emilthaudal/drivetrain",
-    tags: ["Rust", "Clerk", "sqlx"],
-  },
 ]
 
 // ─── Components ───────────────────────────────────────────────────────────────
 // Static markup — no client state needed, so these stay server-rendered.
 
+function AgenticSection() {
+  return (
+    <div className="space-y-10">
+      <div className="space-y-4 text-muted-foreground leading-relaxed max-w-2xl">
+        <p className="text-lg text-foreground">
+          I work agent-first. I scope the work, agents implement it, and I
+          spend my time on review and on the harness that makes their output
+          safe to merge.
+        </p>
+        <p className="text-sm">
+          Agents are only as good as the task they&apos;re given and the checks
+          around them. So most of what I build is that layer: dependency-aware
+          task breakdown, isolated worktrees, independent review, guardrails on
+          dangerous commands, and evidence before anything is called done.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border border-border">
+        {agenticStats.map((stat) => (
+          <div key={stat.label} className="bg-background p-5">
+            <p className="font-heading text-3xl font-semibold tabular-nums">
+              {stat.value}
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {agenticWork.map((item) => {
+          const body = (
+            <>
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <span className="font-heading text-lg font-semibold">
+                  {item.title}
+                </span>
+                {item.url && (
+                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 mt-0.5" />
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {item.description}
+              </p>
+            </>
+          )
+          return item.url ? (
+            <Link
+              key={item.title}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block border border-border p-6 hover:border-foreground/30 transition-colors duration-200"
+            >
+              {body}
+            </Link>
+          ) : (
+            <div key={item.title} className="border border-border p-6">
+              {body}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function StackSection() {
   return (
-    <div className="grid gap-6 sm:grid-cols-3">
+    <div className="grid gap-6 sm:grid-cols-2">
       {Object.entries(stack).map(([category, items]) => (
         <div key={category}>
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
@@ -145,6 +265,14 @@ export default async function Home() {
         <Hero />
 
         <div className="max-w-4xl mx-auto px-6 space-y-24 pb-24">
+          {/* ── Agentic engineering ── */}
+          <section id="agentic">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
+              Agentic engineering
+            </p>
+            <AgenticSection />
+          </section>
+
           {/* ── Work ── */}
           <section id="work">
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-8">
@@ -200,7 +328,8 @@ export default async function Home() {
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
                 I&apos;m always open to interesting conversations — about
-                distributed systems, side projects, or anything else.
+                agentic engineering, distributed systems, side projects, or
+                anything else.
               </p>
               <div className="flex flex-wrap gap-6 pt-4">
                 <Link
@@ -218,6 +347,15 @@ export default async function Home() {
                 >
                   <GithubIcon className="h-4 w-4" />
                   github.com/emilthaudal
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/in/emil-tb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <LinkedinIcon className="h-4 w-4" />
+                  linkedin.com/in/emil-tb
                 </Link>
               </div>
             </div>

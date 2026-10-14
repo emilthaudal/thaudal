@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Mail } from "lucide-react"
 import { GithubIcon } from "@/components/github-icon"
+import { LinkedinIcon } from "@/components/linkedin-icon"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -72,8 +73,8 @@ export function Hero() {
           )}
         >
           <p className="text-lg sm:text-xl text-muted-foreground mt-6 max-w-xl leading-relaxed">
-            Backend engineer building event-driven systems, cloud migrations,
-            and payment infrastructure.{" "}
+            Tech lead building event-driven backends, and the agent tooling
+            that ships them safely. I work agent-first with Claude Code.{" "}
             <span className="text-foreground">Based in Ugelbølle, Denmark.</span>
           </p>
 
@@ -97,6 +98,21 @@ export function Hero() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
+                  href="https://www.linkedin.com/in/emil-tb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <LinkedinIcon className="h-5 w-5" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>LinkedIn</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
                   href="mailto:emil@thaudal.com"
                   aria-label="Email"
                   className="text-muted-foreground hover:text-foreground transition-colors"
@@ -110,10 +126,10 @@ export function Hero() {
             <Separator orientation="vertical" className="h-4" />
 
             <Link
-              href="#work"
+              href="#agentic"
               className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
             >
-              See my work ↓
+              How I work ↓
             </Link>
           </div>
         </div>

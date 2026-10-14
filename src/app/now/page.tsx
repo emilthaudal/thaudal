@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "What I'm currently working on, building, and thinking about.",
 }
 
-const LAST_UPDATED = "September 2026"
+const LAST_UPDATED = "October 2026"
 
 export default function NowPage() {
   return (
@@ -115,10 +115,28 @@ export default function NowPage() {
                     what works, and folding the lessons back into how the
                     ERP migration teams operate day to day.
                   </p>
+                  <p>
+                    That practice now lives in a Claude Code plugin I built and
+                    maintain: skills for planning a feature, running a whole
+                    epic with parallel implementer agents, verifying a change
+                    with real evidence, fixing CI and investigating
+                    production, plus a reviewer agent that reads each PR with
+                    none of the author&apos;s context. A guard hook stops
+                    agents from force-pushing, skipping tests or touching
+                    cloud resources without asking, and every skill change has
+                    to pass an LLM-graded eval suite. It runs in Claude Code,
+                    Copilot CLI and Codex, so nobody has to switch tools to
+                    use it.
+                  </p>
+                  <p>
+                    My own output is the test case: 680+ merged PRs across
+                    roughly 50 services since April, all of it worked
+                    agent-first.
+                  </p>
                   <p className="text-foreground/60 italic">
-                    Current focus: onboarding the first few engineers 1:1 and
-                    turning what I&apos;ve learned into repeatable practice
-                    rather than a habit that lives only in my own workflow.
+                    Current focus: piloting the plugin in my own team, feeding
+                    what a week of real use shows back into the skills, and
+                    then taking it to the rest of the department.
                   </p>
                 </div>
               </div>
@@ -138,20 +156,12 @@ export default function NowPage() {
                 <div className="flex items-baseline gap-3 mb-3">
                   <h2 className="font-heading text-2xl font-semibold">Drivetrain</h2>
                   <Link
-                    href="https://github.com/emilthaudal/drivetrain-api"
+                    href="https://drivetrain.thaudal.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    API ↗
-                  </Link>
-                  <Link
-                    href="https://github.com/emilthaudal/drivetrain-web"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Web ↗
+                    Live ↗
                   </Link>
                 </div>
                 <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
@@ -178,8 +188,36 @@ export default function NowPage() {
                     at runtime.
                   </p>
                   <p className="text-foreground/60 italic">
-                    Currently wiring up the Strava and Intervals.icu ingestion
-                    and the weather-adjusted wear model.
+                    Live at drivetrain.thaudal.com.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <h2 className="font-heading text-2xl font-semibold">Hammi</h2>
+                  <Link
+                    href="https://github.com/emilthaudal/hammi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    GitHub ↗
+                  </Link>
+                </div>
+                <div className="space-y-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  <p>
+                    A week-long challenge: a Tamagotchi for my wife. Hammi is a
+                    pet hamster that lives on her phone. It hatches from an
+                    egg, grows up over four days and gets hungry, bored and
+                    sleepy in real time, with push notifications when it needs
+                    something. The whole household shares the same Hammi.
+                  </p>
+                  <p>
+                    The one hard rule was that it stays gentle: neglect only
+                    makes Hammi sad, never sick, and it cheers up as soon as
+                    someone looks after it. Rust and SQLite on the server, a
+                    React PWA on the phone, one service on Railway.
                   </p>
                 </div>
               </div>
