@@ -1,106 +1,145 @@
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
-// The site's whole visual system lives here. Three type roles, nothing else:
-//   - Playfair (font-heading) for names and titles
-//   - Noto Sans for reading text
-//   - Geist Mono, small and muted, for metadata: section labels, dates, tags
-// Every list on the site is the same hairline-divided Entry, never a boxed card.
-
-export const bodyText = "text-[15px] leading-relaxed text-foreground/80"
+// The site's whole visual system lives here.
+//   - One typeface, Geist Sans. Geist Mono only for the footer.
+//   - Three sizes: display (hero line), body (18px), small.
+//   - Hierarchy is ink vs grey, never boxes, rules or extra weights.
+//   - One accent (brand orange) and one decorative element (the sky panel).
 
 export const textLink =
-  "text-foreground underline decoration-foreground/25 underline-offset-4 transition-colors hover:decoration-foreground"
+  "underline decoration-foreground/25 underline-offset-[5px] transition-colors hover:text-brand hover:decoration-brand/50"
+
+export function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mx-auto max-w-[1600px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,36%)]">
+      {/* Mobile: a short band above the content. Wide: a sticky right panel. */}
+      <aside
+        aria-hidden
+        className="p-3 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-0 lg:h-dvh"
+      >
+        <div className="sky h-28 rounded-2xl lg:h-full" />
+      </aside>
+
+      <div className="flex min-h-dvh flex-col px-6 sm:px-16 lg:col-start-1 lg:row-start-1">
+        <header className="pt-8 sm:pt-14">
+          <Link
+            href="/"
+            className="text-lg font-medium tracking-tight transition-colors hover:text-brand"
+          >
+            Emil Thaudal Bønnerup
+          </Link>
+        </header>
+
+        <main className="max-w-[44rem] flex-1 text-lg leading-[1.55]">
+          {children}
+        </main>
+
+        <footer className="mt-32 flex max-w-[44rem] items-center gap-4 pb-10 font-mono text-xs text-muted-foreground">
+          <span>© {new Date().getFullYear()} Ugelbølle, Denmark</span>
+          <span className="h-px flex-1 bg-border" />
+          <Link href="/now" className="transition-colors hover:text-foreground">
+            Now
+          </Link>
+          <Link
+            href="https://github.com/emilthaudal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            GitHub
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/emil-tb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            LinkedIn
+          </Link>
+        </footer>
+      </div>
+    </div>
+  )
+}
+
+export function Hero({ children }: { children: React.ReactNode }) {
+  return (
+    <h1 className="pt-28 pb-16 text-[28px] leading-[1.25] tracking-tight sm:pt-40 sm:pb-24 sm:text-[32px]">
+      {children}
+    </h1>
+  )
+}
 
 export function Section({
   id,
   label,
+  className,
   children,
 }: {
   id?: string
   label: string
+  className?: string
   children: React.ReactNode
 }) {
   return (
-    <section
-      id={id}
-      className="scroll-mt-24 grid gap-6 md:grid-cols-[9rem_1fr] md:gap-12"
-    >
-      <h2 className="font-mono text-xs text-muted-foreground md:pt-2">
-        {label}
-      </h2>
-      <div className="min-w-0">{children}</div>
+    <section id={id} className={cn("mt-28 scroll-mt-12", className)}>
+      <h2 className="mb-5 text-muted-foreground">{label}</h2>
+      <div className="space-y-5">{children}</div>
     </section>
   )
 }
 
-export function EntryList({ children }: { children: React.ReactNode }) {
-  return <div className="divide-y divide-border">{children}</div>
-}
-
-export function Entry({
+// A titled entry: ink title line, grey details on the same line, then prose.
+export function Item({
   title,
   href,
-  meta,
-  subtitle,
-  tags,
+  details,
   children,
 }: {
   title: string
   href?: string
-  meta?: string
-  subtitle?: string
-  tags?: string[]
+  details?: string
   children?: React.ReactNode
 }) {
   return (
-    <article className="py-7 first:pt-0 last:pb-0">
-      <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-heading text-xl font-semibold">
-          {href ? (
-            <Link
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group decoration-1 underline-offset-4 hover:underline"
-            >
-              {title}
-              <span
-                aria-hidden
-                className="ml-1.5 font-sans text-sm text-muted-foreground transition-colors group-hover:text-foreground"
-              >
-                ↗
-              </span>
-            </Link>
-          ) : (
-            title
-          )}
-        </h3>
-        {meta && (
-          <span className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
-            {meta}
-          </span>
+    <div className="pt-4 first:pt-0">
+      <p>
+        {href ? (
+          <Link
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLink}
+          >
+            {title}
+          </Link>
+        ) : (
+          title
         )}
-      </div>
-      {subtitle && (
-        <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
-      )}
-      {children && <div className={cn("mt-3 space-y-3", bodyText)}>{children}</div>}
-      {tags && (
-        <p className="mt-3 font-mono text-xs text-muted-foreground">
-          {tags.join(" · ")}
-        </p>
-      )}
-    </article>
+        {details && (
+          <span className="text-muted-foreground"> · {details}</span>
+        )}
+      </p>
+      {children && <div className="mt-1.5 space-y-4">{children}</div>}
+    </div>
   )
 }
 
-export function Footer({ children }: { children: React.ReactNode }) {
+// Numbered list with grey numerals.
+export function Steps({ items }: { items: React.ReactNode[] }) {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-6 py-5 font-mono text-xs text-muted-foreground">
-        {children}
-      </div>
-    </footer>
+    <ol className="space-y-3">
+      {items.map((item, i) => (
+        <li key={i} className="grid grid-cols-[1.75rem_1fr]">
+          <span className="text-muted-foreground tabular-nums">{i + 1}</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ol>
   )
+}
+
+export function Muted({ children }: { children: React.ReactNode }) {
+  return <span className="text-muted-foreground">{children}</span>
 }
