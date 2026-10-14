@@ -5,23 +5,18 @@ import { cn } from "@/lib/utils"
 //   - One typeface, Geist Sans. Geist Mono only for the footer.
 //   - Three sizes: display (hero line), body (18px), small.
 //   - Hierarchy is ink vs grey, never boxes, rules or extra weights.
-//   - One accent (brand orange) and one decorative element (the sky panel).
+//   - One accent (brand ember) and one decorative element (the ground glow).
 
 export const textLink =
   "underline decoration-foreground/25 underline-offset-[5px] transition-colors hover:text-brand hover:decoration-brand/50"
 
 export function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-[1600px] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,36%)]">
-      {/* Mobile: a short band above the content. Wide: a sticky right panel. */}
-      <aside
-        aria-hidden
-        className="p-3 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-0 lg:h-dvh"
-      >
-        <div className="sky h-28 rounded-2xl lg:h-full" />
-      </aside>
+    <>
+      {/* Ember glow rising from the bottom edge, fixed behind the text. */}
+      <div aria-hidden className="glow" />
 
-      <div className="flex min-h-dvh flex-col px-6 sm:px-16 lg:col-start-1 lg:row-start-1">
+      <div className="relative z-10 mx-auto flex min-h-dvh max-w-[47rem] flex-col px-6">
         <header className="pt-8 sm:pt-14">
           <Link
             href="/"
@@ -59,7 +54,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </Link>
         </footer>
       </div>
-    </div>
+    </>
   )
 }
 

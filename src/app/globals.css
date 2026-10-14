@@ -53,7 +53,7 @@
 :root {
   --background: oklch(0.966 0.003 90);
   --foreground: oklch(0.2 0.004 60);
-  --brand: oklch(0.66 0.16 45);
+  --brand: oklch(0.58 0.18 32);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.147 0.004 49.3);
   --popover: oklch(1 0 0);
@@ -89,7 +89,7 @@
 .dark {
   --background: oklch(0.17 0.004 60);
   --foreground: oklch(0.94 0.003 80);
-  --brand: oklch(0.74 0.15 50);
+  --brand: oklch(0.72 0.16 45);
   --card: oklch(0.214 0.009 43.1);
   --card-foreground: oklch(0.986 0.002 67.8);
   --popover: oklch(0.214 0.009 43.1);
@@ -133,34 +133,36 @@
   }
 }
 
-/* The site's one decorative element: a grainy evening-sky gradient. */
-.sky {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    oklch(0.8 0.06 255) 0%,
-    oklch(0.79 0.08 320) 28%,
-    oklch(0.74 0.15 45) 58%,
-    oklch(0.86 0.1 80) 100%
+/* The site's one decorative element: an ember glow rising from the bottom
+   edge of the screen, fixed behind the text (cream core, gold, then orange
+   fading out). */
+.glow {
+  position: fixed;
+  left: -15%;
+  right: -15%;
+  bottom: -22vh;
+  height: 38vh;
+  z-index: 0;
+  opacity: 0.75;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(56px);
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    oklch(0.92 0.07 95),
+    oklch(0.8 0.14 65) 30%,
+    oklch(0.64 0.18 38) 58%,
+    transparent 76%
   );
 }
 
-.dark .sky {
-  background: linear-gradient(
-    180deg,
-    oklch(0.32 0.06 265) 0%,
-    oklch(0.42 0.09 320) 30%,
-    oklch(0.6 0.15 42) 64%,
-    oklch(0.72 0.11 75) 100%
+.dark .glow {
+  opacity: 0.5;
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    oklch(0.72 0.14 60),
+    oklch(0.58 0.18 38) 32%,
+    oklch(0.42 0.12 25) 60%,
+    transparent 78%
   );
-}
-
-.sky::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
