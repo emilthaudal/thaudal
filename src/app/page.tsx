@@ -22,7 +22,7 @@ const work = [
   {
     company: "Lunar",
     period: "2022 — 2024",
-    role: "Backend Engineer",
+    role: "Senior Software Engineer",
     description:
       "Built a payment service provider platform for business customers — signups, CRM flows, and large-scale payment APIs, all event sourced. Worked across core banking infrastructure serving thousands of merchants.",
   },
