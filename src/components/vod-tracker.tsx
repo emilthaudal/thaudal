@@ -167,7 +167,17 @@ function dayLabel(d: Day) {
   return `${fmtDay.format(new Date(d.startUtc))} · ${name}`
 }
 
-function Teams({ m }: { m: Match }) {
+function Teams({ m, blurred = false }: { m: Match; blurred?: boolean }) {
+  if (blurred) {
+    return (
+      <>
+        <span className="sr-only">Teams hidden</span>
+        <span aria-hidden className="pointer-events-none blur-[7px] select-none">
+          {m.a} vs {m.b}
+        </span>
+      </>
+    )
+  }
   return (
     <>
       {m.a} <Muted>vs</Muted> {m.b}
@@ -239,10 +249,13 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
   const next = live.find((s) => !prefs.seen[s.k])
   const nextUrl = next && slotOffset(next.d, next.mi, next.n) != null ? vodUrl(next.d, slotOffset(next.d, next.mi, next.n)!, prefs.src) : null
 
-  // A later day's matchups give away earlier results, so they stay hidden
-  // until every earlier game with a VOD is watched.
-  const hidden = (di: number, m: Match) =>
-    !prefs.showAll && !revealed[m.id] && live.some((s) => s.di < di && !prefs.seen[s.k])
+  // Each Swiss day is a new draw built from the results so far, so a day's
+  // matchups stay blurred until every game played on earlier days is ticked.
+  const blurred = (di: number, d: Day) =>
+    !prefs.showAll &&
+    !revealed[d.id] &&
+    d.matches.some((m) => m.a !== "TBD" || m.b !== "TBD") &&
+    slots.some((s) => s.di < di && s.m.games.length > 0 && !prefs.seen[s.k])
 
   const toggle = (k: string) => {
     const seen = { ...prefs.seen }
@@ -317,30 +330,31 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
         )
       )}
 
-      {days.map((d, di) => (
+      {days.map((d, di) => {
+        const hide = blurred(di, d)
+        return (
         <Section key={d.id} label={dayLabel(d)} className="mt-16">
           {d.note && <p className="text-muted-foreground">{d.note}</p>}
           {!d.matches.length && <p className="text-muted-foreground">Matchups not announced yet.</p>}
+          {hide && (
+            <p className="text-muted-foreground">
+              This draw is blurred until you&apos;ve watched every game before it.{" "}
+              <button
+                type="button"
+                onClick={() => setRevealed({ ...revealed, [d.id]: true })}
+                className={cn(textLink, "text-muted-foreground")}
+              >
+                Show anyway
+              </button>
+            </p>
+          )}
           {d.matches.map((m, mi) => {
             const start = m.startUtc ? Date.parse(m.startUtc) : null
             const onAir = !m.games.length && start != null && now > start - 3600_000 && now < start + 6 * 3600_000
             return (
               <div key={m.id} className="pt-4 first:pt-0">
                 <p>
-                  {hidden(di, m) ? (
-                    <>
-                      <Muted>Teams hidden</Muted>{" "}
-                      <button
-                        type="button"
-                        onClick={() => setRevealed({ ...revealed, [m.id]: true })}
-                        className={cn(textLink, "text-muted-foreground")}
-                      >
-                        show
-                      </button>
-                    </>
-                  ) : (
-                    <Teams m={m} />
-                  )}
+                  <Teams m={m} blurred={hide} />
                 </p>
                 <p className="text-base text-muted-foreground">
                   {[start != null && fmtTime.format(start), m.format, m.round].filter(Boolean).join(" · ")}
@@ -382,7 +396,8 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
             )
           })}
         </Section>
-      ))}
+        )
+      })}
 
       <p className="mt-16 text-base text-muted-foreground">
         Schedule last updated {fmtDay.format(new Date(schedule.updatedAt))}, {fmtTime.format(new Date(schedule.updatedAt))}.
