@@ -175,6 +175,29 @@ function Teams({ m }: { m: Match }) {
   )
 }
 
+// A ring that fills in with the brand colour once the game is watched.
+function WatchedToggle({ seen, label, onClick }: { seen: boolean; label: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={seen}
+      aria-label={`${seen ? "Unmark" : "Mark"} ${label} as watched`}
+      title={seen ? "Watched" : "Mark as watched"}
+      onClick={onClick}
+      className={cn(
+        "grid size-[1.125rem] shrink-0 place-items-center rounded-full border-[1.5px] transition-colors",
+        seen ? "border-brand bg-brand text-background" : "border-muted-foreground/50 hover:border-foreground"
+      )}
+    >
+      {seen && (
+        <svg viewBox="0 0 12 12" aria-hidden className="size-2.5">
+          <path d="M2.5 6.2l2.3 2.3 4.7-4.9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
 function Choice({ pressed, onClick, children }: { pressed: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
@@ -232,8 +255,9 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
     <>
       <p className="text-muted-foreground">
         Every game opens Caedrel&apos;s co-stream a minute and a half before it
-        starts. Matchups stay hidden until you&apos;ve watched the games before
-        them, and what you&apos;ve watched is saved in this browser only.
+        starts. Tick the circle next to a game once you&apos;ve seen it; later
+        matchups stay hidden until you&apos;ve watched the games before them.
+        What you&apos;ve watched is saved in this browser only.
       </p>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2">
@@ -266,13 +290,12 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
           <div>
             <p>
               <Teams m={next.m} />
-              <Muted>
-                {" "}
-                · Game {next.n}
-                {maxGames(next.m.format) > 1 && ` of the ${next.m.format}`} · {fmtDay.format(new Date(next.d.startUtc))}
-              </Muted>
             </p>
-            <p className="mt-1.5 flex flex-wrap gap-x-6">
+            <p className="text-base text-muted-foreground">
+              Game {next.n}
+              {maxGames(next.m.format) > 1 && ` of the ${next.m.format}`} · {fmtDay.format(new Date(next.d.startUtc))}
+            </p>
+            <p className="mt-2 flex flex-wrap gap-x-6">
               {nextUrl && (
                 <a href={nextUrl} target="_blank" rel="noopener noreferrer" className={cn(textLink, "text-brand")}>
                   Watch game {next.n}
@@ -302,15 +325,15 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
             const start = m.startUtc ? Date.parse(m.startUtc) : null
             const onAir = !m.games.length && start != null && now > start - 3600_000 && now < start + 6 * 3600_000
             return (
-              <div key={m.id}>
+              <div key={m.id} className="pt-4 first:pt-0">
                 <p>
                   {hidden(di, m) ? (
                     <>
-                      <Muted>Teams hidden until you catch up</Muted>{" "}
+                      <Muted>Teams hidden</Muted>{" "}
                       <button
                         type="button"
                         onClick={() => setRevealed({ ...revealed, [m.id]: true })}
-                        className={textLink}
+                        className={cn(textLink, "text-muted-foreground")}
                       >
                         show
                       </button>
@@ -318,12 +341,11 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
                   ) : (
                     <Teams m={m} />
                   )}
-                  <Muted>
-                    {" · "}
-                    {[m.format, m.round, start != null && fmtTime.format(start)].filter(Boolean).join(" · ")}
-                  </Muted>
                 </p>
-                <p className="mt-1.5 flex flex-wrap gap-x-6 gap-y-1">
+                <p className="text-base text-muted-foreground">
+                  {[start != null && fmtTime.format(start), m.format, m.round].filter(Boolean).join(" · ")}
+                </p>
+                <p className="mt-2 flex flex-wrap gap-x-7 gap-y-2">
                   {onAir && (
                     <a
                       href="https://www.twitch.tv/caedrel"
@@ -342,7 +364,8 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
                     const url = off != null ? vodUrl(d, off, prefs.src) : null
                     if (!url) return <Muted key={n}>Game {n}</Muted>
                     return (
-                      <span key={n} className="inline-flex items-baseline gap-2">
+                      <span key={n} className="inline-flex items-center gap-2">
+                        <WatchedToggle seen={seen} label={`game ${n}`} onClick={() => toggle(k)} />
                         <a
                           href={url}
                           target="_blank"
@@ -351,18 +374,6 @@ export function VodTracker({ schedule }: { schedule: Schedule }) {
                         >
                           Game {n}
                         </a>
-                        <button
-                          type="button"
-                          aria-pressed={seen}
-                          aria-label={`${seen ? "Unmark" : "Mark"} game ${n} as watched`}
-                          onClick={() => toggle(k)}
-                          className={cn(
-                            "text-base transition-colors",
-                            seen ? "text-brand" : "text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {seen ? "✓ watched" : "mark watched"}
-                        </button>
                       </span>
                     )
                   })}
