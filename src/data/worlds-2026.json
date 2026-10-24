@@ -1,0 +1,288 @@
+{
+  "updatedAt": "2026-10-24T14:30:00Z",
+  "note": "Swiss Day 1 filled. Still to fill: 18 Oct game times.",
+  "days": [
+    {
+      "id": "2026-10-15",
+      "label": "Play-In Day 1",
+      "stage": "Play-In",
+      "startUtc": "2026-10-15T18:00:00Z",
+      "stream": {
+        "startUtc": "2026-10-15T08:39:13Z",
+        "twitch": "2901261640",
+        "youtube": "W-rrNPqSHP4",
+        "youtubeParts": [
+          { "id": "W-rrNPqSHP4", "startUtc": "2026-10-15T08:39:13Z" },
+          { "id": "Qn7RF07sQP4", "startUtc": "2026-10-15T20:39:13Z" }
+        ]
+      },
+      "matches": [
+        {
+          "id": "pi-ubsf1",
+          "a": "Karmine Corp",
+          "b": "Cloud9",
+          "format": "Bo5",
+          "round": "Upper bracket semifinal",
+          "startUtc": "2026-10-15T18:16:00Z",
+          "games": [
+            { "n": 1, "startUtc": "2026-10-15T18:16:00Z" },
+            { "n": 2, "startUtc": "2026-10-15T19:15:00Z" },
+            { "n": 3, "startUtc": "2026-10-15T20:17:00Z" },
+            { "n": 4, "startUtc": "2026-10-15T21:14:00Z" },
+            { "n": 5, "startUtc": "2026-10-15T22:16:00Z" }
+          ]
+        },
+        {
+          "id": "pi-ubsf2",
+          "a": "FURIA",
+          "b": "MVK Esports",
+          "format": "Bo5",
+          "round": "Upper bracket semifinal",
+          "startUtc": "2026-10-15T23:11:00Z",
+          "games": [
+            { "n": 1, "startUtc": "2026-10-15T23:11:00Z" },
+            { "n": 2, "startUtc": "2026-10-16T00:06:00Z" },
+            { "n": 3, "startUtc": "2026-10-16T01:01:00Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-10-16",
+      "label": "Play-In Day 2",
+      "stage": "Play-In",
+      "startUtc": "2026-10-16T18:00:00Z",
+      "stream": {
+        "startUtc": "2026-10-16T14:38:15Z",
+        "twitch": "2902287253",
+        "youtube": "-Em2nHecVM0"
+      },
+      "matches": [
+        {
+          "id": "pi-ubf",
+          "a": "Karmine Corp",
+          "b": "MVK Esports",
+          "format": "Bo5",
+          "round": "Upper bracket final",
+          "startUtc": "2026-10-16T18:11:00Z",
+          "games": [
+            { "n": 1, "startUtc": "2026-10-16T18:11:00Z" },
+            { "n": 2, "startUtc": "2026-10-16T19:01:00Z" },
+            { "n": 3, "startUtc": "2026-10-16T19:53:00Z" }
+          ]
+        },
+        {
+          "id": "pi-lbsf",
+          "a": "Cloud9",
+          "b": "FURIA",
+          "format": "Bo5",
+          "round": "Lower bracket semifinal",
+          "startUtc": "2026-10-16T20:53:00Z",
+          "games": [
+            { "n": 1, "startUtc": "2026-10-16T20:53:00Z" },
+            { "n": 2, "startUtc": "2026-10-16T21:52:00Z" },
+            { "n": 3, "startUtc": "2026-10-16T22:47:00Z" },
+            { "n": 4, "startUtc": "2026-10-16T23:43:00Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-10-17",
+      "label": "Play-In Day 3",
+      "stage": "Play-In",
+      "startUtc": "2026-10-17T18:00:00Z",
+      "stream": {
+        "startUtc": "2026-10-17T14:59:14Z",
+        "twitch": "2903273448",
+        "youtube": "FtCzk2coBEA"
+      },
+      "matches": [
+        {
+          "id": "pi-lbf",
+          "a": "FURIA",
+          "b": "MVK Esports",
+          "format": "Bo5",
+          "round": "Lower bracket final",
+          "startUtc": "2026-10-17T18:14:00Z",
+          "games": [
+            { "n": 1, "startUtc": "2026-10-17T18:14:00Z" },
+            { "n": 2, "startUtc": "2026-10-17T19:06:00Z" },
+            { "n": 3, "startUtc": "2026-10-17T19:54:00Z" },
+            { "n": 4, "startUtc": "2026-10-17T20:50:00Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-10-18",
+      "label": "Play-In Day 4",
+      "stage": "Play-In",
+      "startUtc": "2026-10-18T18:00:00Z",
+      "stream": {
+        "startUtc": "2026-10-18T14:19:56Z",
+        "twitch": "2904206934",
+        "youtube": "UrsIFMGrjtQ"
+      },
+      "matches": [
+        {
+          "id": "pi-gf",
+          "a": "Karmine Corp",
+          "b": "MVK Esports",
+          "format": "Bo5",
+          "round": "Play-In final",
+          "startUtc": "2026-10-18T18:00:00Z",
+          "games": []
+        }
+      ]
+    },
+    {
+      "id": "2026-10-23",
+      "label": "Day 1",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-23T17:00:00Z",
+      "stream": {
+        "startUtc": "2026-10-23T13:39:14Z",
+        "twitch": "2908500933",
+        "youtube": "38M2fB-uy9k"
+      },
+      "matches": [
+        {
+          "id": "sw-r1-m1",
+          "a": "Gen.G",
+          "b": "Invictus Gaming",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T17:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T17:14:36Z" }]
+        },
+        {
+          "id": "sw-r1-m5",
+          "a": "Hanwha Life Esports",
+          "b": "Top Esports",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T18:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T18:12:56Z" }]
+        },
+        {
+          "id": "sw-r1-m8",
+          "a": "Bilibili Gaming",
+          "b": "Movistar KOI",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T19:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T19:06:16Z" }]
+        },
+        {
+          "id": "sw-r1-m3",
+          "a": "Anyone's Legend",
+          "b": "Karmine Corp",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T20:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T20:10:34Z" }]
+        },
+        {
+          "id": "sw-r1-m4",
+          "a": "G2 Esports",
+          "b": "Dplus KIA",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T21:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T21:09:51Z" }]
+        },
+        {
+          "id": "sw-r1-m2",
+          "a": "Team Liquid",
+          "b": "CTBC Flying Oyster",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T22:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T22:09:32Z" }]
+        },
+        {
+          "id": "sw-r1-m6",
+          "a": "LOS",
+          "b": "T1",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-23T23:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-23T23:14:32Z" }]
+        },
+        {
+          "id": "sw-r1-m7",
+          "a": "Team Secret Whales",
+          "b": "LYON",
+          "format": "Bo1",
+          "round": "Round 1",
+          "startUtc": "2026-10-24T00:00:00Z",
+          "games": [{ "n": 1, "startUtc": "2026-10-24T00:05:13Z" }]
+        }
+      ]
+    },
+    { "id": "2026-10-24", "label": "Day 2", "stage": "Swiss Stage", "startUtc": "2026-10-24T17:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-25", "label": "Day 3", "stage": "Swiss Stage", "startUtc": "2026-10-25T17:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-26", "label": "Day 4", "stage": "Swiss Stage", "startUtc": "2026-10-26T17:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-28", "label": "Day 5", "stage": "Swiss Stage", "startUtc": "2026-10-28T20:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-29", "label": "Day 6", "stage": "Swiss Stage", "startUtc": "2026-10-29T20:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-30", "label": "Day 7", "stage": "Swiss Stage", "startUtc": "2026-10-30T20:00:00Z", "stream": {}, "matches": [] },
+    { "id": "2026-10-31", "label": "Day 8", "stage": "Swiss Stage", "startUtc": "2026-10-31T17:00:00Z", "stream": {}, "matches": [] },
+    {
+      "id": "2026-11-03",
+      "label": "Quarterfinal 1",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-03T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "qf1", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-03T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-04",
+      "label": "Quarterfinal 2",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-04T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "qf2", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-04T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-05",
+      "label": "Quarterfinal 3",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-05T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "qf3", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-05T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-06",
+      "label": "Quarterfinal 4",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-06T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "qf4", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-06T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-07",
+      "label": "Semifinal 1",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-07T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "sf1", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-07T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-08",
+      "label": "Semifinal 2",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-08T22:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "sf2", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-08T22:00:00Z", "games": [] }]
+    },
+    {
+      "id": "2026-11-14",
+      "label": "Final",
+      "stage": "Knockouts",
+      "startUtc": "2026-11-14T19:00:00Z",
+      "stream": {},
+      "matches": [{ "id": "final", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Final (Brooklyn)", "startUtc": "2026-11-14T19:00:00Z", "games": [] }]
+    }
+  ]
+}
