@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-24T14:30:00Z",
-  "note": "Swiss Day 1 filled. Still to fill: 18 Oct game times.",
+  "updatedAt": "2026-10-24T07:30:00Z",
+  "note": "Swiss Day 1 filled, Day 2 matchups set. Still to fill: 18 Oct game times, Day 2 VODs.",
   "days": [
     {
       "id": "2026-10-15",
@@ -221,7 +221,23 @@
         }
       ]
     },
-    { "id": "2026-10-24", "label": "Day 2", "stage": "Swiss Stage", "startUtc": "2026-10-24T17:00:00Z", "stream": {}, "matches": [] },
+    {
+      "id": "2026-10-24",
+      "label": "Day 2",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-24T17:00:00Z",
+      "stream": {},
+      "matches": [
+        { "id": "sw-r2-m1", "a": "Anyone's Legend", "b": "Top Esports", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T17:00:00Z", "games": [] },
+        { "id": "sw-r2-m2", "a": "CTBC Flying Oyster", "b": "Movistar KOI", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T18:00:00Z", "games": [] },
+        { "id": "sw-r2-m3", "a": "G2 Esports", "b": "LOS", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T19:00:00Z", "games": [] },
+        { "id": "sw-r2-m4", "a": "LYON", "b": "Karmine Corp", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T20:00:00Z", "games": [] },
+        { "id": "sw-r2-m5", "a": "Team Secret Whales", "b": "Invictus Gaming", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T21:00:00Z", "games": [] },
+        { "id": "sw-r2-m6", "a": "Gen.G", "b": "Hanwha Life Esports", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T22:00:00Z", "games": [] },
+        { "id": "sw-r2-m7", "a": "T1", "b": "Dplus KIA", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-24T23:00:00Z", "games": [] },
+        { "id": "sw-r2-m8", "a": "Team Liquid", "b": "Bilibili Gaming", "format": "Bo1", "round": "Round 2", "startUtc": "2026-10-25T00:00:00Z", "games": [] }
+      ]
+    },
     { "id": "2026-10-25", "label": "Day 3", "stage": "Swiss Stage", "startUtc": "2026-10-25T17:00:00Z", "stream": {}, "matches": [] },
     { "id": "2026-10-26", "label": "Day 4", "stage": "Swiss Stage", "startUtc": "2026-10-26T17:00:00Z", "stream": {}, "matches": [] },
     { "id": "2026-10-28", "label": "Day 5", "stage": "Swiss Stage", "startUtc": "2026-10-28T20:00:00Z", "stream": {}, "matches": [] },
