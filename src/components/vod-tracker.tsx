@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useSyncExternalStore } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 import { Muted, Section, textLink } from "@/components/section"
 import { cn } from "@/lib/utils"
 
@@ -172,7 +172,9 @@ function Teams({ m, blurred = false }: { m: Match; blurred?: boolean }) {
     return (
       <>
         <span className="sr-only">Teams hidden</span>
-        <span aria-hidden className="pointer-events-none blur-[7px] select-none">
+        {/* Padding (cancelled out by the negative margin) gives the blur room
+            to fade out; Safari clips a filter to the element's own box. */}
+        <span aria-hidden className="pointer-events-none -m-4 inline-block p-4 blur-[7px] select-none">
           {m.a} vs {m.b}
         </span>
       </>
@@ -221,10 +223,35 @@ function Choice({ pressed, onClick, children }: { pressed: boolean; onClick: () 
   )
 }
 
-export function VodTracker({ schedule }: { schedule: Schedule }) {
+export function VodTracker({ schedule: built }: { schedule: Schedule }) {
   const prefs = useSyncExternalStore(subscribePrefs, readPrefs, () => null)
   const now = useSyncExternalStore(subscribeNow, readNow, () => 0)
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
+  const [schedule, setSchedule] = useState(built)
+
+  // The page is built once per deploy, so a tab left open (or restored from
+  // the browser cache) would keep showing old days. Check for a newer
+  // schedule whenever the tab comes back into view.
+  useEffect(() => {
+    const refresh = async () => {
+      if (document.visibilityState !== "visible") return
+      try {
+        const res = await fetch("/vods/schedule", { cache: "no-store" })
+        if (!res.ok) return
+        const next: Schedule = await res.json()
+        setSchedule((cur) => (next.updatedAt > cur.updatedAt ? next : cur))
+      } catch {
+        // Offline: keep what we have.
+      }
+    }
+    refresh()
+    document.addEventListener("visibilitychange", refresh)
+    window.addEventListener("pageshow", refresh)
+    return () => {
+      document.removeEventListener("visibilitychange", refresh)
+      window.removeEventListener("pageshow", refresh)
+    }
+  }, [])
 
   // Nothing renders on the server: which teams are safe to show depends on
   // what this browser has already watched.
