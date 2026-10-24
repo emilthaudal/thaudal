@@ -11,7 +11,7 @@ Personal site for thaudal.com, hosted on Vercel (deploys from `main`).
 - **Bun** is the package manager. Never use npm, yarn or pnpm.
 - **Next.js 16**, **React 19**, **TypeScript 5** (strict).
 - **Tailwind CSS v4**: CSS-first config in `src/app/globals.css`, no `tailwind.config.*`.
-- **ESLint 9**: flat config in `eslint.config.mjs`. The root `.eslintrc.json` is inactive.
+- **oxlint**: config in `.oxlintrc.json` (react, nextjs, typescript, jsx-a11y plugins).
 - **shadcn/ui**: style `radix-sera`, base color `taupe`, components in `src/components/ui`.
 - **Path alias:** `@/*` → `./src/*`.
 
@@ -21,9 +21,9 @@ Personal site for thaudal.com, hosted on Vercel (deploys from `main`).
 bun install
 bun run dev                   # http://localhost:3000
 bun run build                 # also type-checks
-bun run lint
-bunx tsc --noEmit             # type-check only
-bunx eslint src/app/page.tsx  # lint one file
+bun run lint                  # oxlint
+bun run typecheck             # type-check only
+bunx oxlint src/app/page.tsx  # lint one file
 ```
 
 There are no tests, formatter or codegen.

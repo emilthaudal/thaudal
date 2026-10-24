@@ -133,7 +133,7 @@ export function ActivityGrid({ data }: { data: ActivityResponse }) {
                 gridTemplateColumns: `repeat(${numWeeks}, 1fr)`,
               }}
             >
-              {monthLabels.map(({ label, colIndex }, i) => (
+              {monthLabels.map(({ label, colIndex }) => (
                 <span
                   key={`${label}-${colIndex}`}
                   className="text-[10px] text-muted-foreground leading-none"

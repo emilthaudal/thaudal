@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 //   - Hierarchy is ink vs grey, never boxes, rules or extra weights.
 //   - One accent (brand ember) and one decorative element (the ground glow).
 
+const year = new Date().getFullYear()
+
 export const textLink =
   "underline decoration-foreground/25 underline-offset-[5px] transition-colors hover:text-brand hover:decoration-brand/50"
 
@@ -31,7 +33,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </main>
 
         <footer className="mt-32 flex max-w-[44rem] items-center gap-4 pb-10 font-mono text-xs text-muted-foreground">
-          <span>© {new Date().getFullYear()} Ugelbølle, Denmark</span>
+          <span>© {year} Ugelbølle, Denmark</span>
           <span className="h-px flex-1 bg-border" />
           <Link href="/now" className="transition-colors hover:text-foreground">
             Now
