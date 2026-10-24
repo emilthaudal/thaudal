@@ -87,9 +87,9 @@
 }
 
 .dark {
-  --background: oklch(0.17 0.004 60);
-  --foreground: oklch(0.94 0.003 80);
-  --brand: oklch(0.72 0.16 45);
+  --background: oklch(0.19 0.008 60);
+  --foreground: oklch(0.93 0.012 85);
+  --brand: oklch(0.74 0.15 55);
   --card: oklch(0.214 0.009 43.1);
   --card-foreground: oklch(0.986 0.002 67.8);
   --popover: oklch(0.214 0.009 43.1);
@@ -99,7 +99,7 @@
   --secondary: oklch(0.268 0.011 36.5);
   --secondary-foreground: oklch(0.986 0.002 67.8);
   --muted: oklch(0.268 0.011 36.5);
-  --muted-foreground: oklch(0.62 0.004 70);
+  --muted-foreground: oklch(0.64 0.01 70);
   --accent: oklch(0.268 0.011 36.5);
   --accent-foreground: oklch(0.986 0.002 67.8);
   --destructive: oklch(0.704 0.191 22.216);
@@ -156,13 +156,16 @@
   );
 }
 
+/* Screen blending keeps the dark glow luminous; plain alpha over a dark page
+   turns orange into brown. */
 .dark .glow {
-  opacity: 0.5;
+  opacity: 0.6;
+  mix-blend-mode: screen;
   background: radial-gradient(
     ellipse at 50% 35%,
-    oklch(0.72 0.14 60),
-    oklch(0.58 0.18 38) 32%,
-    oklch(0.42 0.12 25) 60%,
-    transparent 78%
+    oklch(0.86 0.12 80),
+    oklch(0.72 0.17 55) 26%,
+    oklch(0.56 0.2 35) 52%,
+    transparent 72%
   );
 }
