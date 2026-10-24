@@ -53,4 +53,3 @@ Pushing directly to `main` is fine; no branch or PR needed.
 ## Gotchas
 
 - `suppressHydrationWarning` on `<html>` is intentional; next-themes needs it.
-- The workflows in `.github/workflows/` are legacy (feature-branch builds and an old FTP deploy from the `static` branch). Vercel does the real deploys.
