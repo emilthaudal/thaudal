@@ -377,7 +377,10 @@ export function VodTracker({ schedule: built }: { schedule: Schedule }) {
           )}
           {d.matches.map((m, mi) => {
             const start = m.startUtc ? Date.parse(m.startUtc) : null
-            const onAir = !m.games.length && start != null && now > start - 3600_000 && now < start + 6 * 3600_000
+            // From an hour before the start, so games watched live can be
+            // ticked before their VOD is added the next morning.
+            const started = start != null && now > start - 3600_000
+            const onAir = !m.games.length && started && now < start + 6 * 3600_000
             return (
               <div key={m.id} className="pt-4 first:pt-0">
                 <p>
@@ -403,7 +406,15 @@ export function VodTracker({ schedule: built }: { schedule: Schedule }) {
                     const seen = Boolean(prefs.seen[k])
                     const off = hasVod(d) ? slotOffset(d, mi, n) : null
                     const url = off != null ? vodUrl(d, off, prefs.src) : null
-                    if (!url) return <Muted key={n}>Game {n}</Muted>
+                    if (!url && !started) return <Muted key={n}>Game {n}</Muted>
+                    if (!url) {
+                      return (
+                        <span key={n} className="inline-flex items-center gap-2">
+                          <WatchedToggle seen={seen} label={`game ${n}`} onClick={() => toggle(k)} />
+                          <Muted>Game {n}</Muted>
+                        </span>
+                      )
+                    }
                     return (
                       <span key={n} className="inline-flex items-center gap-2">
                         <WatchedToggle seen={seen} label={`game ${n}`} onClick={() => toggle(k)} />
