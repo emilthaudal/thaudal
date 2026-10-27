@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-26T08:10:00Z",
-  "note": "Swiss Days 1-3 filled, Day 4 matchups set. Still to fill: Day 4 VODs, Day 5+ matchups.",
+  "updatedAt": "2026-10-27T06:15:00Z",
+  "note": "Swiss Days 1-4 filled, Days 5-7 matchups set. Still to fill: Day 5+ VODs, Day 8 and knockout matchups.",
   "days": [
     {
       "id": "2026-10-15",
@@ -264,18 +264,63 @@
       "label": "Day 4",
       "stage": "Swiss Stage",
       "startUtc": "2026-10-26T17:00:00Z",
-      "stream": {},
+      "stream": {
+        "startUtc": "2026-10-26T13:56:33Z",
+        "twitch": "2911306589",
+        "youtube": "Y-KF7mAxRHE"
+      },
       "matches": [
-        { "id": "sw-r3-m5", "a": "CTBC Flying Oyster", "b": "T1", "format": "Bo1", "round": "Round 3", "startUtc": "2026-10-26T17:00:00Z", "games": [] },
-        { "id": "sw-r3-m6", "a": "Bilibili Gaming", "b": "Karmine Corp", "format": "Bo1", "round": "Round 3", "startUtc": "2026-10-26T18:00:00Z", "games": [] },
-        { "id": "sw-r3-m7", "a": "LOS", "b": "Team Secret Whales", "format": "Bo3", "round": "Round 3", "startUtc": "2026-10-26T19:00:00Z", "games": [] },
-        { "id": "sw-r3-m8", "a": "Team Liquid", "b": "Anyone's Legend", "format": "Bo3", "round": "Round 3", "startUtc": "2026-10-26T22:00:00Z", "games": [] }
+        { "id": "sw-r3-m5", "a": "CTBC Flying Oyster", "b": "T1", "format": "Bo1", "round": "Round 3", "startUtc": "2026-10-26T17:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-26T17:12:00Z" }] },
+        { "id": "sw-r3-m6", "a": "Bilibili Gaming", "b": "Karmine Corp", "format": "Bo1", "round": "Round 3", "startUtc": "2026-10-26T18:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-26T18:03:00Z" }] },
+        { "id": "sw-r3-m7", "a": "LOS", "b": "Team Secret Whales", "format": "Bo3", "round": "Round 3", "startUtc": "2026-10-26T19:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-26T19:03:00Z" }, { "n": 2, "startUtc": "2026-10-26T20:01:00Z" }] },
+        { "id": "sw-r3-m8", "a": "Team Liquid", "b": "Anyone's Legend", "format": "Bo3", "round": "Round 3", "startUtc": "2026-10-26T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-26T21:01:00Z" }, { "n": 2, "startUtc": "2026-10-26T21:54:00Z" }] }
       ]
     },
-    { "id": "2026-10-28", "label": "Day 5", "stage": "Swiss Stage", "startUtc": "2026-10-28T20:00:00Z", "stream": {}, "matches": [] },
-    { "id": "2026-10-29", "label": "Day 6", "stage": "Swiss Stage", "startUtc": "2026-10-29T20:00:00Z", "stream": {}, "matches": [] },
-    { "id": "2026-10-30", "label": "Day 7", "stage": "Swiss Stage", "startUtc": "2026-10-30T20:00:00Z", "stream": {}, "matches": [] },
-    { "id": "2026-10-31", "label": "Day 8", "stage": "Swiss Stage", "startUtc": "2026-10-31T17:00:00Z", "stream": {}, "matches": [] },
+    {
+      "id": "2026-10-28",
+      "label": "Day 5",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-28T20:00:00Z",
+      "stream": {},
+      "matches": [
+        { "id": "sw-r4-m1", "a": "Movistar KOI", "b": "T1", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T20:00:00Z", "games": [] },
+        { "id": "sw-r4-m2", "a": "LYON", "b": "Invictus Gaming", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T23:00:00Z", "games": [] }
+      ]
+    },
+    {
+      "id": "2026-10-29",
+      "label": "Day 6",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-29T20:00:00Z",
+      "stream": {},
+      "matches": [
+        { "id": "sw-r4-m3", "a": "CTBC Flying Oyster", "b": "Karmine Corp", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T20:00:00Z", "games": [] },
+        { "id": "sw-r4-m4", "a": "Bilibili Gaming", "b": "Top Esports", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T23:00:00Z", "games": [] }
+      ]
+    },
+    {
+      "id": "2026-10-30",
+      "label": "Day 7",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-30T20:00:00Z",
+      "stream": {},
+      "matches": [
+        { "id": "sw-r4-m5", "a": "Team Liquid", "b": "LOS", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-30T20:00:00Z", "games": [] },
+        { "id": "sw-r4-m6", "a": "G2 Esports", "b": "Hanwha Life Esports", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-30T23:00:00Z", "games": [] }
+      ]
+    },
+    {
+      "id": "2026-10-31",
+      "label": "Day 8",
+      "stage": "Swiss Stage",
+      "startUtc": "2026-10-31T17:00:00Z",
+      "stream": {},
+      "matches": [
+        { "id": "sw-r5-m1", "a": "TBD", "b": "TBD", "format": "Bo3", "round": "Round 5", "startUtc": "2026-10-31T17:00:00Z", "games": [] },
+        { "id": "sw-r5-m2", "a": "TBD", "b": "TBD", "format": "Bo3", "round": "Round 5", "startUtc": "2026-10-31T20:00:00Z", "games": [] },
+        { "id": "sw-r5-m3", "a": "TBD", "b": "TBD", "format": "Bo3", "round": "Round 5", "startUtc": "2026-10-31T23:00:00Z", "games": [] }
+      ]
+    },
     {
       "id": "2026-11-03",
       "label": "Quarterfinal 1",
