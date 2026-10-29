@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-27T06:15:00Z",
-  "note": "Swiss Days 1-4 filled, Days 5-7 matchups set. Still to fill: Day 5+ VODs, Day 8 and knockout matchups.",
+  "updatedAt": "2026-10-29T11:55:00Z",
+  "note": "Swiss Days 1-5 filled, Days 6-7 matchups set. Still to fill: Day 6+ VODs, Day 8 and knockout matchups.",
   "days": [
     {
       "id": "2026-10-15",
@@ -281,10 +281,14 @@
       "label": "Day 5",
       "stage": "Swiss Stage",
       "startUtc": "2026-10-28T20:00:00Z",
-      "stream": {},
+      "stream": {
+        "startUtc": "2026-10-28T15:14:14Z",
+        "twitch": "2913096684",
+        "youtube": "x3hOhrVbkhc"
+      },
       "matches": [
-        { "id": "sw-r4-m1", "a": "Movistar KOI", "b": "T1", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T20:00:00Z", "games": [] },
-        { "id": "sw-r4-m2", "a": "LYON", "b": "Invictus Gaming", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T23:00:00Z", "games": [] }
+        { "id": "sw-r4-m1", "a": "Movistar KOI", "b": "T1", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T20:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-28T20:04:55Z" }, { "n": 2, "startUtc": "2026-10-28T21:04:49Z" }] },
+        { "id": "sw-r4-m2", "a": "LYON", "b": "Invictus Gaming", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-28T23:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-28T21:56:28Z" }, { "n": 2, "startUtc": "2026-10-28T22:42:43Z" }, { "n": 3, "startUtc": "2026-10-28T23:42:59Z" }] }
       ]
     },
     {
