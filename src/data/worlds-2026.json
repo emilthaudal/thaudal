@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-29T11:55:00Z",
-  "note": "Swiss Days 1-5 filled, Days 6-7 matchups set. Still to fill: Day 6+ VODs, Day 8 and knockout matchups.",
+  "updatedAt": "2026-10-30T07:45:00Z",
+  "note": "Swiss Days 1-6 filled, Day 7 matchups set. Still to fill: Day 7+ VODs, Day 8 and knockout matchups.",
   "days": [
     {
       "id": "2026-10-15",
@@ -296,10 +296,14 @@
       "label": "Day 6",
       "stage": "Swiss Stage",
       "startUtc": "2026-10-29T20:00:00Z",
-      "stream": {},
+      "stream": {
+        "startUtc": "2026-10-29T14:49:15Z",
+        "twitch": "2913962001",
+        "youtube": "YdfeqBGYfDk"
+      },
       "matches": [
-        { "id": "sw-r4-m3", "a": "CTBC Flying Oyster", "b": "Karmine Corp", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T20:00:00Z", "games": [] },
-        { "id": "sw-r4-m4", "a": "Bilibili Gaming", "b": "Top Esports", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T23:00:00Z", "games": [] }
+        { "id": "sw-r4-m3", "a": "CTBC Flying Oyster", "b": "Karmine Corp", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T20:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-29T20:12:00Z" }, { "n": 2, "startUtc": "2026-10-29T20:59:00Z" }] },
+        { "id": "sw-r4-m4", "a": "Bilibili Gaming", "b": "Top Esports", "format": "Bo3", "round": "Round 4", "startUtc": "2026-10-29T23:00:00Z", "games": [{ "n": 1, "startUtc": "2026-10-29T22:38:00Z" }, { "n": 2, "startUtc": "2026-10-29T23:26:00Z" }, { "n": 3, "startUtc": "2026-10-30T00:24:00Z" }] }
       ]
     },
     {
