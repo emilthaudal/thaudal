@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-02T07:30:00Z",
-  "note": "Swiss Stage filled, quarterfinal matchups set. Still to fill: knockout VODs and semifinal/final matchups.",
+  "updatedAt": "2026-11-04T07:20:00Z",
+  "note": "Swiss Stage and Quarterfinal 1 filled. Still to fill: remaining knockout VODs and semifinal/final matchups.",
   "days": [
     {
       "id": "2026-10-15",
@@ -342,8 +342,12 @@
       "label": "Quarterfinal 1",
       "stage": "Knockouts",
       "startUtc": "2026-11-03T22:00:00Z",
-      "stream": {},
-      "matches": [{ "id": "qf1", "a": "Top Esports", "b": "Invictus Gaming", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-03T22:00:00Z", "games": [] }]
+      "stream": {
+        "startUtc": "2026-11-03T16:04:48Z",
+        "twitch": "2918508215",
+        "youtube": "PkgPJdFBIEw"
+      },
+      "matches": [{ "id": "qf1", "a": "Top Esports", "b": "Invictus Gaming", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-03T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-11-03T22:08:22Z" }, { "n": 2, "startUtc": "2026-11-03T23:00:34Z" }, { "n": 3, "startUtc": "2026-11-04T00:07:52Z" }, { "n": 4, "startUtc": "2026-11-04T02:13:36Z" }] }]
     },
     {
       "id": "2026-11-04",
