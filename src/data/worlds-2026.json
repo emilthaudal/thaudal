@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-04T07:20:00Z",
-  "note": "Swiss Stage and Quarterfinal 1 filled. Still to fill: remaining knockout VODs and semifinal/final matchups.",
+  "updatedAt": "2026-11-05T06:10:00Z",
+  "note": "Swiss Stage and Quarterfinals 1-2 filled. Still to fill: remaining knockout VODs and Semifinal 2/final matchups.",
   "days": [
     {
       "id": "2026-10-15",
@@ -354,8 +354,12 @@
       "label": "Quarterfinal 2",
       "stage": "Knockouts",
       "startUtc": "2026-11-04T22:00:00Z",
-      "stream": {},
-      "matches": [{ "id": "qf2", "a": "Gen.G", "b": "LYON", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-04T22:00:00Z", "games": [] }]
+      "stream": {
+        "startUtc": "2026-11-04T15:28:04Z",
+        "twitch": "2919370861",
+        "youtube": "qk5gxmn5LUM"
+      },
+      "matches": [{ "id": "qf2", "a": "Gen.G", "b": "LYON", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-04T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-11-04T22:14:25Z" }, { "n": 2, "startUtc": "2026-11-04T23:06:33Z" }, { "n": 3, "startUtc": "2026-11-04T23:54:40Z" }] }]
     },
     {
       "id": "2026-11-05",
@@ -379,7 +383,7 @@
       "stage": "Knockouts",
       "startUtc": "2026-11-07T22:00:00Z",
       "stream": {},
-      "matches": [{ "id": "sf1", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-07T22:00:00Z", "games": [] }]
+      "matches": [{ "id": "sf1", "a": "Gen.G", "b": "Invictus Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-07T22:00:00Z", "games": [] }]
     },
     {
       "id": "2026-11-08",
