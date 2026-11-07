@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-06T06:05:00Z",
-  "note": "Swiss Stage and Quarterfinals 1-3 filled. Still to fill: remaining knockout VODs and Semifinal 2/final matchups.",
+  "updatedAt": "2026-11-07T07:50:00Z",
+  "note": "Swiss Stage and all Quarterfinals filled. Still to fill: Semifinal and Final VODs, and the final matchup.",
   "days": [
     {
       "id": "2026-10-15",
@@ -378,8 +378,12 @@
       "label": "Quarterfinal 4",
       "stage": "Knockouts",
       "startUtc": "2026-11-06T22:00:00Z",
-      "stream": {},
-      "matches": [{ "id": "qf4", "a": "T1", "b": "Karmine Corp", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-06T22:00:00Z", "games": [] }]
+      "stream": {
+        "startUtc": "2026-11-06T17:26:44Z",
+        "twitch": "2921274445",
+        "youtube": "xSq6HwlKv5Q"
+      },
+      "matches": [{ "id": "qf4", "a": "T1", "b": "Karmine Corp", "format": "Bo5", "round": "Quarterfinal", "startUtc": "2026-11-06T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-11-06T22:13:42Z" }, { "n": 2, "startUtc": "2026-11-06T23:16:02Z" }, { "n": 3, "startUtc": "2026-11-07T00:03:36Z" }, { "n": 4, "startUtc": "2026-11-07T01:06:58Z" }] }]
     },
     {
       "id": "2026-11-07",
@@ -395,7 +399,7 @@
       "stage": "Knockouts",
       "startUtc": "2026-11-08T22:00:00Z",
       "stream": {},
-      "matches": [{ "id": "sf2", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-08T22:00:00Z", "games": [] }]
+      "matches": [{ "id": "sf2", "a": "T1", "b": "Bilibili Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-08T22:00:00Z", "games": [] }]
     },
     {
       "id": "2026-11-14",
