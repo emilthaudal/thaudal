@@ -1,5 +1,5 @@
-// Field journal for the WoW Forever playthrough on /wow.
-// To add a screenshot: resize it to 1920px wide, drop it in public/wow/forever/
+// Field journal for the WoW Forever playthrough on /forever.
+// To add a screenshot: resize it to 1920px wide, drop it in public/forever/
 // named after the in-game timestamp (MMDDYY_HHMMSS.jpg), and add an entry below.
 
 export type Shot = { file: string; alt: string }

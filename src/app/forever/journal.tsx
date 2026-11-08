@@ -15,7 +15,7 @@ import {
 } from "@/data/wow-forever"
 import s from "./journal.module.css"
 
-const src = (file: string) => `/wow/forever/${file}`
+const src = (file: string) => `/forever/${file}`
 
 type ViewerItem = Shot & { title: string; meta: string }
 

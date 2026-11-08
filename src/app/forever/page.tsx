@@ -33,18 +33,18 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url: "https://thaudal.com/wow",
+    url: "https://thaudal.com/forever",
     siteName: "thaudal.com",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/wow/forever/110626_165307.jpg", width: 1920, height: 1080 }],
+    images: [{ url: "/forever/110626_165307.jpg", width: 1920, height: 1080 }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
     creator: "@emilthaudal",
-    images: ["/wow/forever/110626_165307.jpg"],
+    images: ["/forever/110626_165307.jpg"],
   },
 }
 
