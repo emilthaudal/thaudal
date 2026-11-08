@@ -33,6 +33,7 @@ There are no tests, formatter or codegen.
 - `src/app/page.tsx`: home page.
 - `src/app/now/page.tsx`: `/now` page.
 - `src/app/vods/page.tsx` and `src/components/vod-tracker.tsx`: spoiler-free Worlds 2026 VOD list. Data is `src/data/worlds-2026.json`, updated daily by a Claude Code scheduled task that pushes to `main`; watched state is per browser (localStorage). `src/app/vods/schedule/route.ts` serves the same JSON so an open tab picks up a newer deploy when it regains focus.
+- `src/app/wow/` and `src/data/wow-forever.ts`: WoW Forever screenshot journal at `/wow`. Its own always-dark look in `journal.module.css`, separate from the site's visual system. Images live in `public/wow/forever/`, resized to 1920px wide and named `MMDDYY_HHMMSS.jpg` after the in-game screenshot timestamp; add a screenshot by dropping the file there and adding an entry to the data file.
 - `src/app/api/github-activity/route.ts` and `src/lib/github-activity.ts`: GitHub contribution heatmap, merged across both accounts and cached for an hour.
 
 ## Environment variables
