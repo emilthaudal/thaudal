@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07T07:50:00Z",
-  "note": "Swiss Stage and all Quarterfinals filled. Still to fill: Semifinal and Final VODs, and the final matchup.",
+  "updatedAt": "2026-11-09T08:45:00Z",
+  "note": "Swiss Stage, Quarterfinals and Semifinals filled. Still to fill: Final VOD (Nov 14).",
   "days": [
     {
       "id": "2026-10-15",
@@ -390,16 +390,24 @@
       "label": "Semifinal 1",
       "stage": "Knockouts",
       "startUtc": "2026-11-07T22:00:00Z",
-      "stream": {},
-      "matches": [{ "id": "sf1", "a": "Gen.G", "b": "Invictus Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-07T22:00:00Z", "games": [] }]
+      "stream": {
+        "startUtc": "2026-11-07T17:35:53Z",
+        "twitch": "2922290548",
+        "youtube": "KsUPtA_HpAE"
+      },
+      "matches": [{ "id": "sf1", "a": "Gen.G", "b": "Invictus Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-07T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-11-07T22:14:00Z" }, { "n": 2, "startUtc": "2026-11-07T23:09:00Z" }, { "n": 3, "startUtc": "2026-11-08T00:00:00Z" }] }]
     },
     {
       "id": "2026-11-08",
       "label": "Semifinal 2",
       "stage": "Knockouts",
       "startUtc": "2026-11-08T22:00:00Z",
-      "stream": {},
-      "matches": [{ "id": "sf2", "a": "T1", "b": "Bilibili Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-08T22:00:00Z", "games": [] }]
+      "stream": {
+        "startUtc": "2026-11-08T17:04:02Z",
+        "twitch": "2923277721",
+        "youtube": "SY5bztGET2M"
+      },
+      "matches": [{ "id": "sf2", "a": "T1", "b": "Bilibili Gaming", "format": "Bo5", "round": "Semifinal", "startUtc": "2026-11-08T22:00:00Z", "games": [{ "n": 1, "startUtc": "2026-11-08T22:14:38Z" }, { "n": 2, "startUtc": "2026-11-08T23:05:20Z" }, { "n": 3, "startUtc": "2026-11-08T23:58:24Z" }, { "n": 4, "startUtc": "2026-11-09T00:56:30Z" }] }]
     },
     {
       "id": "2026-11-14",
@@ -407,7 +415,7 @@
       "stage": "Knockouts",
       "startUtc": "2026-11-14T19:00:00Z",
       "stream": {},
-      "matches": [{ "id": "final", "a": "TBD", "b": "TBD", "format": "Bo5", "round": "Final (Brooklyn)", "startUtc": "2026-11-14T19:00:00Z", "games": [] }]
+      "matches": [{ "id": "final", "a": "Gen.G", "b": "Bilibili Gaming", "format": "Bo5", "round": "Final (Brooklyn)", "startUtc": "2026-11-14T19:00:00Z", "games": [] }]
     }
   ]
 }
