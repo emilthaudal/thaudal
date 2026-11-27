@@ -144,7 +144,7 @@ const projects: {
         poster="/projects/hammi-poster.webp"
         alt="Hammi hatching from its egg, eating seeds and getting a cuddle."
         width={780}
-        height={1240}
+        height={1160}
         className="max-w-[17rem]"
       />
     ),

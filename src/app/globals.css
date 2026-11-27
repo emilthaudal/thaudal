@@ -135,6 +135,65 @@
   }
 }
 
+/* The project screenshot lightbox (components/lightbox.tsx). The box fits the
+   viewport at the image's own aspect ratio; the script animates it from the
+   inline image and back. */
+html:has(dialog.lightbox[open]) {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: zoom-out;
+  outline: none;
+}
+
+.lightbox::backdrop {
+  background: oklch(0.12 0.003 260 / 0.82);
+}
+
+.lightbox-box {
+  --pad: clamp(12px, 4vmin, 48px);
+  position: relative;
+  width: min(100vw - 2 * var(--pad), (100dvh - 2 * var(--pad)) * var(--ratio));
+  overflow: hidden;
+  border-radius: 12px;
+  transform-origin: top left;
+  box-shadow:
+    0 2px 6px oklch(0 0 0 / 0.2),
+    0 30px 80px -20px oklch(0 0 0 / 0.55);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 26px;
+  line-height: 1;
+  color: oklch(0.95 0.003 85);
+  background: oklch(0.2 0.002 260 / 0.6);
+  cursor: pointer;
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid oklch(0.95 0.003 85);
+  outline-offset: 2px;
+}
+
 /* The site's one decorative element: an ember glow rising from the bottom
    edge of the page, behind the footer only, so no body text ever sits on it
    (cream core, gold, then orange fading out). Shell clips its overflow. */
