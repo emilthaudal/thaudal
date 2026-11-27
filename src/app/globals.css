@@ -194,39 +194,30 @@ html:has(dialog.lightbox[open]) {
   outline-offset: 2px;
 }
 
-/* The site's one decorative element: an ember glow rising from the bottom
-   edge of the page, behind the footer only, so no body text ever sits on it
-   (cream core, gold, then orange fading out). Shell clips its overflow. */
-.glow {
+/* The site's one decorative element: a faint ember wash at the top of the
+   page, behind the name and hero, gone before the first paragraph. It scrolls
+   with the page, so no body text ever sits on it. Shell clips its overflow. */
+.dawn {
   position: absolute;
-  left: -15%;
-  right: -15%;
-  bottom: -170px;
-  height: 340px;
+  inset: 0 0 auto;
+  height: 620px;
   z-index: 0;
-  opacity: 0.7;
   pointer-events: none;
-  border-radius: 50%;
-  filter: blur(56px);
   background: radial-gradient(
-    ellipse at 50% 35%,
-    oklch(0.92 0.07 95),
-    oklch(0.8 0.14 65) 30%,
-    oklch(0.64 0.18 38) 58%,
-    transparent 76%
+    120% 620px at 30% -120px,
+    oklch(0.86 0.09 60 / 0.55),
+    oklch(0.9 0.05 70 / 0.25) 45%,
+    transparent 75%
   );
 }
 
-/* Screen blending keeps the dark glow luminous; plain alpha over a dark page
-   turns orange into brown. */
-.dark .glow {
-  opacity: 0.5;
-  mix-blend-mode: screen;
+/* Darker and lower in alpha, so the dark page stays near-black rather than
+   turning brown. */
+.dark .dawn {
   background: radial-gradient(
-    ellipse at 50% 35%,
-    oklch(0.86 0.12 80),
-    oklch(0.72 0.17 55) 26%,
-    oklch(0.56 0.2 35) 52%,
-    transparent 72%
+    120% 620px at 30% -120px,
+    oklch(0.5 0.12 45 / 0.35),
+    oklch(0.35 0.06 40 / 0.18) 45%,
+    transparent 75%
   );
 }

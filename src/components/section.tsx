@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 //   - Three sizes: display (hero line), body (18px), small.
 //   - Hierarchy is ink vs grey, never boxes, rules or extra weights. The one
 //     exception is project media, which sits in a thin frame (see media.tsx).
-//   - One accent (brand ember) and one decorative element (the ground glow).
+//   - One accent (brand ember) and one decorative element (the dawn wash at the top).
 
 const year = new Date().getFullYear()
 
@@ -16,9 +16,8 @@ export const textLink =
 export function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative overflow-clip">
-      {/* Ember glow at the very end of the page, behind the footer. It used to
-          be fixed to the viewport, so every paragraph scrolled across it. */}
-      <div aria-hidden className="glow" />
+      {/* Faint ember wash behind the top of the page (see .dawn). */}
+      <div aria-hidden className="dawn" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-[47rem] flex-col px-6">
         <header className="pt-8 sm:pt-14">
