@@ -127,8 +127,8 @@ const projects: {
           poster: "/projects/drivetrain-dark-poster.webp",
         }}
         alt="Drivetrain's dashboard with upcoming maintenance, then the gravel bike's component wear, where the chain is close to its limit."
-        width={1280}
-        height={800}
+        width={2048}
+        height={1280}
       />
     ),
   },
