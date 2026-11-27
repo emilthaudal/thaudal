@@ -9,25 +9,31 @@ import {
   Steps,
   textLink,
 } from "@/components/section"
+import { Clip, Shot, ThemedShot } from "@/components/media"
 import { getGithubActivity } from "@/lib/github-activity"
+import prismLight from "@/assets/projects/prism-light.webp"
+import prismDark from "@/assets/projects/prism-dark.webp"
+import prismTui from "@/assets/projects/prism-tui.webp"
+import meridianLight from "@/assets/projects/meridian-focus-light.webp"
+import meridianDark from "@/assets/projects/meridian-focus-dark.webp"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const agenticWork = [
   {
-    title: "A Claude Code plugin for my team.",
+    title: "Prism.",
     description:
-      "Skills for planning, implementing, verifying, fixing CI and investigating production, plus implementer and reviewer subagents. A guard hook blocks risky git and cloud operations, and every skill change has to pass an eval suite graded by an LLM judge. Runs in Claude Code, Copilot CLI and Codex.",
+      "A desk for running many Claude Code sessions at once. I talk to one agent; it starts the others, watches them, and brings me only the decisions that are mine.",
   },
   {
     title: "From epic to green PRs.",
     description:
-      "A task graph built from ticket dependencies, implementer agents running in parallel in their own git worktrees, and a reviewer with none of the author's context on every PR. New tickets start as soon as their blockers merge.",
+      "A task graph built from ticket dependencies, implementer agents in their own git worktrees, and a reviewer with none of the author's context on every PR.",
   },
   {
-    title: "Multi-agent orchestration.",
+    title: "Guardrails and evidence.",
     description:
-      "One coordinator session drives several workers in terminal tabs: it starts them with a brief, tells me which ones need a decision, relays my answers and watches for completion.",
+      "A guard hook on risky git and cloud commands, proof before anything is called done, and an LLM-graded eval suite that every skill change has to pass.",
   },
   {
     title: "Open-source Claude Code mods.",
@@ -41,36 +47,70 @@ const work = [
     company: "Whiteaway",
     details: "Tech Lead & Senior Engineer, 2024 – now",
     description:
-      "Taking the fulfillment pipeline off a legacy Navision ERP and onto event-driven services, across several 2–3 person teams. I work with our architect and project owner to break business capabilities into scoped team work, and I lead our move to agentic development.",
+      "Event-driven fulfilment services across several small teams, and the move to agentic development.",
   },
   {
     company: "Lunar",
     details: "Senior Software Engineer, 2022 – 2024",
     description:
-      "Built a payment service provider platform for business customers: signups, CRM flows and large-scale payment APIs, all event sourced, serving thousands of merchants.",
+      "A payment platform for business customers, event sourced end to end.",
   },
   {
     company: "Beierholm",
     details: "Software Engineer, 2020 – 2022",
     description:
-      "Internal tooling for accountants. Led a stateful CRM migration from on-prem to Azure and SharePoint using event sourcing. The first legacy system I took apart end to end.",
+      "Internal tooling for accountants, and a CRM migration from on-prem to Azure.",
   },
   {
     company: "SSI Schäfer",
     details: "Java Developer, 2017 – 2020",
     description:
-      "Warehouse management systems for automated logistics. Distributed systems the hard way: real conveyors, real consequences.",
+      "Warehouse management for automated logistics: real conveyors, real consequences.",
   },
 ]
 
-// Every project here was built agent-first with Claude Code.
-const projects = [
+// Every project here was built agent-first with Claude Code. All screens are
+// captured from fixture or demo data, never from real accounts.
+const projects: {
+  name: string
+  details: string
+  description: string
+  url?: string
+  media?: React.ReactNode
+}[] = [
   {
-    name: "Claude Code mods",
-    details: "TypeScript, Claude Code hooks",
+    name: "Prism",
+    details: "Go, Swift, macOS",
     description:
-      "My public Claude Code plugins: a live progress band for long and multi-agent runs, a readable transcript, and per-repo GitHub accounts.",
-    url: "https://github.com/emilthaudal/claude-plugins",
+      "A desk for running many Claude Code sessions without reading their scrollback. One agent starts sessions in the background and watches them; what reaches me is a question with options, the evidence and a recommendation. A native Mac app and a terminal UI.",
+    url: "https://github.com/emilthaudal/prism",
+    media: (
+      <>
+        <ThemedShot
+          light={prismLight}
+          dark={prismDark}
+          alt="Prism on macOS: sessions on the left, the conversation with the desk in the middle, and the board of decisions on the right."
+        />
+        <Shot
+          src={prismTui}
+          alt="The same desk in the terminal UI."
+          className="mt-4"
+        />
+      </>
+    ),
+  },
+  {
+    name: "Meridian",
+    details: "Swift, SwiftUI, macOS",
+    description:
+      "My workday in one native Mac window: calendar, reminders, code reviews and what my agents are waiting on, ranked so the next thing is obvious. Free gaps in the day suggest what fits in them.",
+    media: (
+      <ThemedShot
+        light={meridianLight}
+        dark={meridianDark}
+        alt="Meridian: the next thing to do, a ranked list of what waits on me, and today's calendar with free slots."
+      />
+    ),
   },
   {
     name: "Drivetrain",
@@ -85,6 +125,23 @@ const projects = [
     description:
       "A Tamagotchi-style pet hamster I built for my wife in a week. It hatches, grows up over four days and gets hungry and sleepy in real time. Gentle by design: neglect only makes it sad.",
     url: "https://github.com/emilthaudal/hammi",
+    media: (
+      <Clip
+        src="/projects/hammi.mp4"
+        poster="/projects/hammi-poster.webp"
+        alt="Hammi hatching from its egg, eating seeds and getting a cuddle."
+        width={780}
+        height={1240}
+        className="max-w-[17rem]"
+      />
+    ),
+  },
+  {
+    name: "Claude Code mods",
+    details: "TypeScript, Claude Code hooks",
+    description:
+      "My public Claude Code plugins: a live progress band for long and multi-agent runs, a readable transcript, and per-repo GitHub accounts.",
+    url: "https://github.com/emilthaudal/claude-plugins",
   },
   {
     name: "Relay",
@@ -113,30 +170,37 @@ export default async function Home() {
   return (
     <Shell>
       <Hero>
-        I build event-driven backends, and the agent tooling that ships them{" "}
-        <span className="text-brand">safely.</span>
+        I run many coding agents at once, and build the tools that make
+        their work <span className="text-brand">safe to merge.</span>
       </Hero>
 
       <Link
-        href="https://github.com/emilthaudal/claude-plugins"
+        href="https://github.com/emilthaudal/prism"
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-2xl border border-border bg-background px-6 py-5 transition-colors hover:border-foreground/20"
+        className="group flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-2xl border border-border px-6 py-5 transition-colors hover:border-foreground/25"
       >
-        <span>My Claude Code mods are open source.</span>
-        <span className="text-brand">See them on GitHub</span>
+        <span>Prism, my desk for running many agents, is open source.</span>
+        <span className="text-brand">
+          See it on GitHub{" "}
+          <span
+            aria-hidden
+            className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+          >
+            →
+          </span>
+        </span>
       </Link>
 
       <div className="mt-16 space-y-5">
         <p>
-          I&apos;m a tech lead at Whiteaway in Denmark, where I take a legacy
-          ERP apart into event-driven services across several small teams.
+          I&apos;m a tech lead at Whiteaway in Denmark, building event-driven
+          backend services with several small teams.
         </p>
         <p>
           I work agent-first. I scope the work, agents implement it, and I
           spend my time on review and on the harness that makes their output
-          safe to merge. Since April 2026 that&apos;s meant 680+ merged PRs
-          across about 50 services.
+          safe to merge.
         </p>
         <p>
           Agents are only as good as the task they&apos;re given and the checks
@@ -156,14 +220,6 @@ export default async function Home() {
         />
       </Section>
 
-      <Section id="work" label="Work">
-        {work.map((job) => (
-          <Item key={job.company} title={job.company} details={job.details}>
-            <p>{job.description}</p>
-          </Item>
-        ))}
-      </Section>
-
       <Section id="projects" label="Projects">
         {projects.map((project) => (
           <Item
@@ -171,8 +227,18 @@ export default async function Home() {
             title={project.name}
             href={project.url}
             details={project.details}
+            className={project.media ? "pb-8 last:pb-0" : undefined}
           >
             <p>{project.description}</p>
+            {project.media && <div className="pt-3">{project.media}</div>}
+          </Item>
+        ))}
+      </Section>
+
+      <Section id="work" label="Work">
+        {work.map((job) => (
+          <Item key={job.company} title={job.company} details={job.details}>
+            <p>{job.description}</p>
           </Item>
         ))}
       </Section>
