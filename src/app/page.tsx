@@ -127,8 +127,8 @@ const projects: {
           poster: "/projects/drivetrain-dark-poster.webp",
         }}
         alt="Drivetrain's dashboard with upcoming maintenance, then the gravel bike's component wear, where the chain is close to its limit."
-        width={1280}
-        height={800}
+        width={2048}
+        height={1280}
       />
     ),
   },
@@ -144,7 +144,7 @@ const projects: {
         poster="/projects/hammi-poster.webp"
         alt="Hammi hatching from its egg, eating seeds and getting a cuddle."
         width={780}
-        height={1240}
+        height={1160}
         className="max-w-[17rem]"
       />
     ),
