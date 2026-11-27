@@ -118,6 +118,15 @@ const projects: {
     description:
       "Bicycle component wear tracker. Imports rides from Intervals.icu, adjusts wear for the weather, and warns before a part is worn out.",
     url: "https://drivetrain.thaudal.com",
+    media: (
+      <Clip
+        src="/projects/drivetrain.mp4"
+        poster="/projects/drivetrain-poster.webp"
+        alt="Drivetrain's dashboard with upcoming maintenance, then the gravel bike's component wear, where the chain is close to its limit."
+        width={1280}
+        height={800}
+      />
+    ),
   },
   {
     name: "Hammi",
