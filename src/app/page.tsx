@@ -122,6 +122,10 @@ const projects: {
       <Clip
         src="/projects/drivetrain.mp4"
         poster="/projects/drivetrain-poster.webp"
+        dark={{
+          src: "/projects/drivetrain-dark.mp4",
+          poster: "/projects/drivetrain-dark-poster.webp",
+        }}
         alt="Drivetrain's dashboard with upcoming maintenance, then the gravel bike's component wear, where the chain is close to its limit."
         width={1280}
         height={800}

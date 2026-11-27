@@ -49,10 +49,12 @@ export function Shot({
   )
 }
 
-// A short muted loop. Plays only while on screen.
+// A short muted loop. Plays only while on screen. With a dark version, each
+// theme gets its own; the hidden one never intersects, so it never loads.
 export function Clip({
   src,
   poster,
+  dark,
   alt,
   width,
   height,
@@ -60,14 +62,28 @@ export function Clip({
 }: {
   src: string
   poster: string
+  dark?: { src: string; poster: string }
   alt: string
   width: number
   height: number
   className?: string
 }) {
+  const props = { label: alt, width, height }
   return (
     <figure className={cn(frame, className)}>
-      <LoopVideo src={src} poster={poster} label={alt} width={width} height={height} />
+      {dark ? (
+        <>
+          <LoopVideo src={src} poster={poster} className="dark:hidden" {...props} />
+          <LoopVideo
+            src={dark.src}
+            poster={dark.poster}
+            className="hidden dark:block"
+            {...props}
+          />
+        </>
+      ) : (
+        <LoopVideo src={src} poster={poster} {...props} />
+      )}
     </figure>
   )
 }

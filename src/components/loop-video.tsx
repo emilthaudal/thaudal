@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { cn } from "@/lib/utils"
 
 // A muted, looping demo clip that loads and plays only while it is on screen,
 // and not at all for people who ask for reduced motion (they get the poster).
@@ -10,12 +11,14 @@ export function LoopVideo({
   label,
   width,
   height,
+  className,
 }: {
   src: string
   poster: string
   label: string
   width: number
   height: number
+  className?: string
 }) {
   const ref = useRef<HTMLVideoElement>(null)
 
@@ -52,7 +55,7 @@ export function LoopVideo({
       loop
       playsInline
       preload="none"
-      className="block h-auto w-full"
+      className={cn("block h-auto w-full", className)}
     />
   )
 }
