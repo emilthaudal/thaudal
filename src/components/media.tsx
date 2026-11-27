@@ -7,7 +7,7 @@ import { ZoomImage } from "@/components/lightbox"
 // demo data. The one place the site draws a frame, because a screenshot on the
 // page background needs an edge.
 
-const frame =
+export const frame =
   "overflow-hidden rounded-xl bg-muted ring-1 ring-foreground/10 shadow-[0_1px_2px_oklch(0_0_0/0.06),0_8px_24px_-12px_oklch(0_0_0/0.18)]"
 
 // A screenshot with a light and a dark version, following the theme. The

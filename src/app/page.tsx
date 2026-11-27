@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Suspense } from "react"
 import { ActivityGrid } from "@/components/github-activity"
 import {
   Hero,
@@ -11,6 +12,13 @@ import {
 } from "@/components/section"
 import { Clip, Shot, ThemedShot } from "@/components/media"
 import { getGithubActivity } from "@/lib/github-activity"
+import { LayoutSwitch } from "@/components/layout-switch"
+import {
+  ProjectsFeatureGrid,
+  ProjectsShelf,
+  ProjectsStage,
+} from "@/components/project-layouts"
+import { projectInfo, prismTuiAlt, type ProjectInfo } from "@/data/projects"
 import prismLight from "@/assets/projects/prism-light.webp"
 import prismDark from "@/assets/projects/prism-dark.webp"
 import prismTui from "@/assets/projects/prism-tui.webp"
@@ -70,54 +78,34 @@ const work = [
 ]
 
 // Every project here was built agent-first with Claude Code. All screens are
-// captured from fixture or demo data, never from real accounts.
-const projects: {
-  name: string
-  details: string
-  description: string
-  url?: string
-  media?: React.ReactNode
-}[] = [
+// captured from fixture or demo data, never from real accounts. The words are
+// in data/projects.ts, shared with the layouts under comparison (EMI-492).
+const projects: (ProjectInfo & { media?: React.ReactNode })[] = [
   {
-    name: "Prism",
-    details: "Go, Swift, macOS",
-    description:
-      "A desk for running many Claude Code sessions without reading their scrollback. One agent starts sessions in the background and watches them; what reaches me is a question with options, the evidence and a recommendation. A native Mac app and a terminal UI.",
-    url: "https://github.com/emilthaudal/prism",
+    ...projectInfo.prism,
     media: (
       <>
         <ThemedShot
           light={prismLight}
           dark={prismDark}
-          alt="Prism on macOS: sessions on the left, the conversation with the desk in the middle, and the board of decisions on the right."
+          alt={projectInfo.prism.alt}
         />
-        <Shot
-          src={prismTui}
-          alt="The same desk in the terminal UI."
-          className="mt-4"
-        />
+        <Shot src={prismTui} alt={prismTuiAlt} className="mt-4" />
       </>
     ),
   },
   {
-    name: "Meridian",
-    details: "Swift, SwiftUI, macOS",
-    description:
-      "My workday in one native Mac window: calendar, reminders, code reviews and what my agents are waiting on, ranked so the next thing is obvious. Free gaps in the day suggest what fits in them.",
+    ...projectInfo.meridian,
     media: (
       <ThemedShot
         light={meridianLight}
         dark={meridianDark}
-        alt="Meridian: the next thing to do, a ranked list of what waits on me, and today's calendar with free slots."
+        alt={projectInfo.meridian.alt}
       />
     ),
   },
   {
-    name: "Drivetrain",
-    details: "Rust, Next.js, Railway",
-    description:
-      "Bicycle component wear tracker. Imports rides from Intervals.icu, adjusts wear for the weather, and warns before a part is worn out.",
-    url: "https://drivetrain.thaudal.com",
+    ...projectInfo.drivetrain,
     media: (
       <Clip
         src="/projects/drivetrain.mp4"
@@ -126,43 +114,27 @@ const projects: {
           src: "/projects/drivetrain-dark.mp4",
           poster: "/projects/drivetrain-dark-poster.webp",
         }}
-        alt="Drivetrain's dashboard with upcoming maintenance, then the gravel bike's component wear, where the chain is close to its limit."
+        alt={projectInfo.drivetrain.alt}
         width={2048}
         height={1280}
       />
     ),
   },
   {
-    name: "Hammi",
-    details: "Rust, React, PWA",
-    description:
-      "A Tamagotchi-style pet hamster I built for my wife in a week. It hatches, grows up over four days and gets hungry and sleepy in real time. Gentle by design: neglect only makes it sad.",
-    url: "https://github.com/emilthaudal/hammi",
+    ...projectInfo.hammi,
     media: (
       <Clip
         src="/projects/hammi.mp4"
         poster="/projects/hammi-poster.webp"
-        alt="Hammi hatching from its egg, eating seeds and getting a cuddle."
+        alt={projectInfo.hammi.alt}
         width={780}
         height={1160}
         className="max-w-[17rem]"
       />
     ),
   },
-  {
-    name: "Claude Code mods",
-    details: "TypeScript, Claude Code hooks",
-    description:
-      "My public Claude Code plugins: a live progress band for long and multi-agent runs, a readable transcript, and per-repo GitHub accounts.",
-    url: "https://github.com/emilthaudal/claude-plugins",
-  },
-  {
-    name: "Relay",
-    details: "Swift, iOS, HealthKit",
-    description:
-      "Syncs workouts across HealthKit, Strava and Intervals.icu, deduplicating as it goes.",
-    url: "https://github.com/emilthaudal/Relay",
-  },
+  projectInfo.mods,
+  projectInfo.relay,
 ]
 
 const stack = {
@@ -179,6 +151,23 @@ const stack = {
 
 export default async function Home() {
   const activity = await getGithubActivity()
+
+  const currentProjects = (
+    <Section id="projects" label="Projects">
+      {projects.map((project) => (
+        <Item
+          key={project.name}
+          title={project.name}
+          href={project.url}
+          details={project.details}
+          className={project.media ? "pb-8 last:pb-0" : undefined}
+        >
+          <p>{project.description}</p>
+          {project.media && <div className="pt-3">{project.media}</div>}
+        </Item>
+      ))}
+    </Section>
+  )
 
   return (
     <Shell>
@@ -233,20 +222,16 @@ export default async function Home() {
         />
       </Section>
 
-      <Section id="projects" label="Projects">
-        {projects.map((project) => (
-          <Item
-            key={project.name}
-            title={project.name}
-            href={project.url}
-            details={project.details}
-            className={project.media ? "pb-8 last:pb-0" : undefined}
-          >
-            <p>{project.description}</p>
-            {project.media && <div className="pt-3">{project.media}</div>}
-          </Item>
-        ))}
-      </Section>
+      {/* EMI-492: ?layout=a|b|c shows a shorter Projects section for comparison;
+          without it, and in the prerendered page, this is today's. */}
+      <Suspense fallback={currentProjects}>
+        <LayoutSwitch
+          current={currentProjects}
+          a={<ProjectsFeatureGrid />}
+          b={<ProjectsStage />}
+          c={<ProjectsShelf />}
+        />
+      </Suspense>
 
       <Section id="work" label="Work">
         {work.map((job) => (
