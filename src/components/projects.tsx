@@ -6,6 +6,8 @@ import { projectInfo, prismTuiAlt, type ProjectInfo } from "@/data/projects"
 import prismTui from "@/assets/projects/prism-tui.webp"
 import meridianLight from "@/assets/projects/meridian-focus-light.webp"
 import meridianDark from "@/assets/projects/meridian-focus-dark.webp"
+import modsReadable from "@/assets/projects/mods-readable.webp"
+import relayWorkouts from "@/assets/projects/relay-workouts.webp"
 
 const { prism, meridian, drivetrain, hammi, mods, relay } = projectInfo
 
@@ -44,6 +46,12 @@ const media = {
       className={className}
     />
   ),
+  mods: (className?: string) => (
+    <Shot src={modsReadable} alt={mods.alt} className={className} />
+  ),
+  relay: (className?: string) => (
+    <Shot src={relayWorkouts} alt={relay.alt} className={className} />
+  ),
   hammi: (className?: string) => (
     <Clip
       src="/projects/hammi.mp4"
@@ -61,6 +69,20 @@ const fit = {
   meridian: "h-full aspect-[2560/1720]",
   drivetrain: "h-full aspect-[2048/1280]",
   hammi: "h-full aspect-[780/1160]",
+  mods: "h-full aspect-[1280/1000]",
+  // A phone is too narrow to read at tile height, so it fills the width and
+  // runs off the bottom of the tile.
+  relay: "mt-[6%] w-[46%] self-start",
+}
+
+// A faint tint of each project, so the fill around a picture belongs to it.
+const tint = {
+  meridian: "bg-sky-500/10",
+  drivetrain: "bg-emerald-500/10",
+  hammi: "bg-pink-400/15",
+  tui: "bg-indigo-500/10",
+  mods: "bg-orange-500/10",
+  relay: "bg-blue-500/10",
 }
 
 // A project as a small card: title line, then the description in grey.
@@ -77,10 +99,23 @@ function Words({ info, className }: { info: ProjectInfo; className?: string }) {
   )
 }
 
-// Prism's film wide, then everything else as one grid of small cards.
-function Tile({ children }: { children: React.ReactNode }) {
+// Prism's film wide, then everything else as one grid of small cards. Every
+// card's picture sits in a tile of the same 16:10 shape, centred on a tinted
+// fill, so a tall phone or a wide terminal lines up with the rest.
+function Tile({
+  className,
+  children,
+}: {
+  className: string
+  children: React.ReactNode
+}) {
   return (
-    <div className="mb-4 flex aspect-[16/10] items-end">
+    <div
+      className={cn(
+        "mb-4 flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl p-[4%]",
+        className,
+      )}
+    >
       {children}
     </div>
   )
@@ -96,19 +131,19 @@ export function Projects() {
         {media.prism()}
         <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Tile>{media.meridian(fit.meridian)}</Tile>
+            <Tile className={tint.meridian}>{media.meridian(fit.meridian)}</Tile>
             <Words info={meridian} />
           </div>
           <div>
-            <Tile>{media.drivetrain(fit.drivetrain)}</Tile>
+            <Tile className={tint.drivetrain}>{media.drivetrain(fit.drivetrain)}</Tile>
             <Words info={drivetrain} />
           </div>
           <div>
-            <Tile>{media.hammi(fit.hammi)}</Tile>
+            <Tile className={tint.hammi}>{media.hammi(fit.hammi)}</Tile>
             <Words info={hammi} />
           </div>
           <div>
-            <Tile>{media.tui(fit.tui)}</Tile>
+            <Tile className={tint.tui}>{media.tui(fit.tui)}</Tile>
             <Words
               info={{
                 name: "Prism in the terminal",
@@ -118,8 +153,14 @@ export function Projects() {
               }}
             />
           </div>
-          <Words info={mods} />
-          <Words info={relay} />
+          <div>
+            <Tile className={tint.mods}>{media.mods(fit.mods)}</Tile>
+            <Words info={mods} />
+          </div>
+          <div>
+            <Tile className={tint.relay}>{media.relay(fit.relay)}</Tile>
+            <Words info={relay} />
+          </div>
         </div>
       </div>
     </Section>
