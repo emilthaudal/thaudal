@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ActivityGrid } from "@/components/github-activity"
 import {
-  Hero,
   Item,
   Muted,
   Section,
@@ -10,7 +9,7 @@ import {
   textLink,
 } from "@/components/section"
 import { getGithubActivity } from "@/lib/github-activity"
-import { Projects } from "@/components/projects"
+import { Projects, media } from "@/components/projects"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -76,33 +75,50 @@ const stack = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 // Server Component: only the activity grid's tooltip ships as client JS.
 
+// The claims platform's first month, as proof under the headline.
+const proof = [
+  ["~14 h", "to build Whiteaway's claims platform"],
+  ["155", "PRs merged by agents"],
+  ["0", "lines written by hand"],
+]
+
 export default async function Home() {
   const activity = await getGithubActivity()
 
   return (
     <Shell>
-      <Hero>
-        I run many coding agents at once, and build the tools that make
-        their work <span className="text-brand">safe to merge.</span>
-      </Hero>
+      <h1 className="pt-20 pb-10 text-[30px] leading-[1.2] tracking-tight sm:pt-24 sm:text-[40px]">
+        Agents write my code. I build{" "}
+        <span className="text-brand">the desk that runs them.</span>
+      </h1>
 
-      <Link
-        href="https://github.com/emilthaudal/prism"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex flex-wrap items-center justify-between gap-x-6 gap-y-1 rounded-2xl border border-border px-6 py-5 transition-colors hover:border-foreground/25"
-      >
-        <span>Prism, my desk for running many agents, is open source.</span>
-        <span className="text-brand">
-          See it on GitHub{" "}
-          <span
-            aria-hidden
-            className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-          >
-            →
-          </span>
-        </span>
-      </Link>
+      <dl className="grid grid-cols-3 gap-x-6 pb-14 sm:gap-x-8">
+        {proof.map(([value, label]) => (
+          <div key={label} className="flex flex-col-reverse justify-end">
+            <dt className="text-sm leading-snug text-muted-foreground sm:text-base">
+              {label}
+            </dt>
+            <dd className="text-[24px] tracking-tight tabular-nums sm:text-[28px]">
+              {value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {/* The Prism film is the page's first picture; Projects leaves it out. */}
+      <div className="breakout">{media.prism()}</div>
+      <p className="mt-4 text-base text-muted-foreground">
+        Prism, the desk I run my agents from.{" "}
+        <Link
+          href="https://github.com/emilthaudal/prism"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={textLink}
+        >
+          It&apos;s open source
+        </Link>
+        .
+      </p>
 
       <div className="mt-16 space-y-5">
         <p>

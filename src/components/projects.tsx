@@ -139,6 +139,9 @@ const claimsStats = [
   ["0", "lines by hand"],
 ]
 
+// The home page's hero shows the Prism film, so Projects leaves it out.
+export { media }
+
 export function Projects() {
   return (
     <Section id="projects" label="Projects">
@@ -165,8 +168,7 @@ export function Projects() {
         <p>{prism.description}</p>
       </Item>
       <div className="breakout pt-3">
-        {media.prism()}
-        <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <Tile className={tint.meridian}>{media.meridian(fit.meridian)}</Tile>
             <Words info={meridian} />
