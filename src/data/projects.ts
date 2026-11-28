@@ -18,7 +18,7 @@ export const projectInfo = {
     description:
       "Claims and returns for webshops, from the customer's first message to the refund. A claim form on the shop's own site, a workspace where agents work each case with one thread per party, a warehouse screen for returns, rules that handle the routine cases, and an MCP server so AI agents can work cases with a person approving every change. API first: the workspace uses only the public API.",
     url: "https://site-staging-46a8.up.railway.app",
-    alt: "A warranty claim for a leaking dishwasher in the agent workspace, in Danish: the claimed item and order on the left, the customer's thread in the middle, and the next steps the workflow allows on the right.",
+    alt: "A warranty claim for a leaking dishwasher in the agent workspace: the claimed item and order on the left, the customer's thread in the middle, and the next steps the workflow allows on the right.",
   },
   prism: {
     name: "Prism",

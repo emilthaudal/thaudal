@@ -8,7 +8,8 @@ import meridianLight from "@/assets/projects/meridian-focus-light.webp"
 import meridianDark from "@/assets/projects/meridian-focus-dark.webp"
 import modsReadable from "@/assets/projects/mods-readable.webp"
 import relayWorkouts from "@/assets/projects/relay-workouts.webp"
-import claimsCase from "@/assets/projects/claims-case.webp"
+import claimsLight from "@/assets/projects/claims-case-light.webp"
+import claimsDark from "@/assets/projects/claims-case-dark.webp"
 
 const { claims, prism, meridian, drivetrain, hammi, mods, relay } = projectInfo
 
@@ -16,7 +17,12 @@ const { claims, prism, meridian, drivetrain, hammi, mods, relay } = projectInfo
 // width, or "h-full" plus its own aspect ratio to fit a height.
 const media = {
   claims: (className?: string) => (
-    <Shot src={claimsCase} alt={claims.alt} className={className} />
+    <ThemedShot
+      light={claimsLight}
+      dark={claimsDark}
+      alt={claims.alt}
+      className={className}
+    />
   ),
   prism: (className?: string) => (
     <PrismDemo
