@@ -8,12 +8,16 @@ import meridianLight from "@/assets/projects/meridian-focus-light.webp"
 import meridianDark from "@/assets/projects/meridian-focus-dark.webp"
 import modsReadable from "@/assets/projects/mods-readable.webp"
 import relayWorkouts from "@/assets/projects/relay-workouts.webp"
+import claimsCase from "@/assets/projects/claims-case.webp"
 
-const { prism, meridian, drivetrain, hammi, mods, relay } = projectInfo
+const { claims, prism, meridian, drivetrain, hammi, mods, relay } = projectInfo
 
 // Each project's media, sized by the class it is given: "w-full" to fill the
 // width, or "h-full" plus its own aspect ratio to fit a height.
 const media = {
+  claims: (className?: string) => (
+    <Shot src={claimsCase} alt={claims.alt} className={className} />
+  ),
   prism: (className?: string) => (
     <PrismDemo
       alt={prism.alt}
@@ -99,7 +103,7 @@ function Words({ info, className }: { info: ProjectInfo; className?: string }) {
   )
 }
 
-// Prism's film wide, then everything else as one grid of small cards. Every
+// The claims platform and Prism wide, then everything else as one grid of small cards. Every
 // card's picture sits in a tile of the same 16:10 shape, centred on a tinted
 // fill, so a tall phone or a wide terminal lines up with the rest.
 function Tile({
@@ -121,9 +125,36 @@ function Tile({
   )
 }
 
+// The claims platform's first month.
+const claimsStats = [
+  ["~14 h", "to the first version"],
+  ["155", "PRs merged"],
+  ["1,300", "automated tests"],
+  ["0", "lines by hand"],
+]
+
 export function Projects() {
   return (
     <Section id="projects" label="Projects">
+      <Item title={claims.name} href={claims.url} details={claims.details}>
+        <p>{claims.description}</p>
+        <p>
+          I started it on my own time in October 2026, as a weekend experiment
+          while we were setting up a SaaS for claims. After one weekend, about 14 hours of work, most of the product
+          existed, and Whiteaway chose it instead. It is now the group's own
+          claims platform, running on our AWS. Agents wrote every line; I
+          reviewed evidence, not code.
+        </p>
+      </Item>
+      <dl className="grid grid-cols-2 gap-x-10 gap-y-5 sm:grid-cols-4">
+        {claimsStats.map(([value, label]) => (
+          <div key={label} className="flex flex-col-reverse">
+            <dt className="text-base text-muted-foreground">{label}</dt>
+            <dd className="tabular-nums">{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="breakout pt-3">{media.claims("w-full sm:rounded-2xl")}</div>
       <Item title={prism.name} href={prism.url} details={prism.details}>
         <p>{prism.description}</p>
       </Item>

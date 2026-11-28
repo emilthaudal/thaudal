@@ -42,7 +42,7 @@ const work = [
     company: "Whiteaway",
     details: "Tech Lead & Senior Engineer, 2024 – now",
     description:
-      "Event-driven fulfilment services across several small teams, and the move to agentic development.",
+      "Event-driven fulfilment services across several small teams, the move to agentic development, and the group's claims platform, which I started as a side project.",
   },
   {
     company: "Lunar",
