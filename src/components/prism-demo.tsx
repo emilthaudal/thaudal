@@ -187,6 +187,19 @@ export function PrismDemo({
     }
   }
 
+  // On a phone the film's text is too small to read, so it opens full screen.
+  const enlarge = () => {
+    const video = shown() as
+      | (HTMLVideoElement & { webkitEnterFullscreen?: () => void })
+      | null
+    if (!video) return
+    load(video)
+    if (video.requestFullscreen) video.requestFullscreen().catch(() => {})
+    else video.webkitEnterFullscreen?.()
+    held.current = false
+    video.play().catch(() => {})
+  }
+
   const shared = {
     width,
     height,
@@ -247,6 +260,13 @@ export function PrismDemo({
         </ol>
         <div className="mt-1 flex items-baseline justify-between gap-6 text-sm text-muted-foreground">
           <p>{moments[active].caption}</p>
+          <button
+            type="button"
+            onClick={enlarge}
+            className="shrink-0 transition-colors hover:text-foreground sm:hidden"
+          >
+            Full screen
+          </button>
           <button
             type="button"
             onClick={toggle}
