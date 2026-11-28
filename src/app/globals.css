@@ -194,34 +194,9 @@ html:has(dialog.lightbox[open]) {
   outline-offset: 2px;
 }
 
-/* EMI-492, the Projects layouts under comparison (project-layouts.tsx).
-   .breakout widens a block past the text column, centred, up to 68rem.
-   .shelf is a sideways scroller that runs to both edges of the window while
-   its first card starts on the text column's left edge. */
+/* Widens a block past the text column, centred, up to 68rem. */
 .breakout {
   margin-inline: calc((100% - min(100vw - 3rem, 68rem)) / 2);
-}
-
-.shelf {
-  --h: min(30rem, 52vw);
-  /* From the window's edge to the text column (44rem, or the window less its
-     1.5rem padding). Not a percentage: scroll-padding would read one against
-     the scroller's own width. */
-  --side: calc((100vw - min(100vw - 3rem, 44rem)) / 2);
-  display: flex;
-  gap: 2.5rem;
-  margin-inline: calc(var(--side) * -1);
-  padding-inline: var(--side);
-  scroll-padding-inline: var(--side);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-
-.shelf > * {
-  flex: none;
-  scroll-snap-align: start;
 }
 
 /* The site's one decorative element: a faint ember wash at the top of the

@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Suspense } from "react"
 import { ActivityGrid } from "@/components/github-activity"
 import {
   Hero,
@@ -10,20 +9,8 @@ import {
   Steps,
   textLink,
 } from "@/components/section"
-import { Clip, Shot, ThemedShot } from "@/components/media"
 import { getGithubActivity } from "@/lib/github-activity"
-import { LayoutSwitch } from "@/components/layout-switch"
-import {
-  ProjectsFeatureGrid,
-  ProjectsShelf,
-  ProjectsStage,
-} from "@/components/project-layouts"
-import { projectInfo, prismTuiAlt, type ProjectInfo } from "@/data/projects"
-import prismLight from "@/assets/projects/prism-light.webp"
-import prismDark from "@/assets/projects/prism-dark.webp"
-import prismTui from "@/assets/projects/prism-tui.webp"
-import meridianLight from "@/assets/projects/meridian-focus-light.webp"
-import meridianDark from "@/assets/projects/meridian-focus-dark.webp"
+import { Projects } from "@/components/projects"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -77,66 +64,6 @@ const work = [
   },
 ]
 
-// Every project here was built agent-first with Claude Code. All screens are
-// captured from fixture or demo data, never from real accounts. The words are
-// in data/projects.ts, shared with the layouts under comparison (EMI-492).
-const projects: (ProjectInfo & { media?: React.ReactNode })[] = [
-  {
-    ...projectInfo.prism,
-    media: (
-      <>
-        <ThemedShot
-          light={prismLight}
-          dark={prismDark}
-          alt={projectInfo.prism.alt}
-        />
-        <Shot src={prismTui} alt={prismTuiAlt} className="mt-4" />
-      </>
-    ),
-  },
-  {
-    ...projectInfo.meridian,
-    media: (
-      <ThemedShot
-        light={meridianLight}
-        dark={meridianDark}
-        alt={projectInfo.meridian.alt}
-      />
-    ),
-  },
-  {
-    ...projectInfo.drivetrain,
-    media: (
-      <Clip
-        src="/projects/drivetrain.mp4"
-        poster="/projects/drivetrain-poster.webp"
-        dark={{
-          src: "/projects/drivetrain-dark.mp4",
-          poster: "/projects/drivetrain-dark-poster.webp",
-        }}
-        alt={projectInfo.drivetrain.alt}
-        width={2048}
-        height={1280}
-      />
-    ),
-  },
-  {
-    ...projectInfo.hammi,
-    media: (
-      <Clip
-        src="/projects/hammi.mp4"
-        poster="/projects/hammi-poster.webp"
-        alt={projectInfo.hammi.alt}
-        width={780}
-        height={1160}
-        className="max-w-[17rem]"
-      />
-    ),
-  },
-  projectInfo.mods,
-  projectInfo.relay,
-]
-
 const stack = {
   Agentic:
     "Claude Code, skills, hooks and subagents, MCP, LLM evals, multi-agent orchestration",
@@ -151,23 +78,6 @@ const stack = {
 
 export default async function Home() {
   const activity = await getGithubActivity()
-
-  const currentProjects = (
-    <Section id="projects" label="Projects">
-      {projects.map((project) => (
-        <Item
-          key={project.name}
-          title={project.name}
-          href={project.url}
-          details={project.details}
-          className={project.media ? "pb-8 last:pb-0" : undefined}
-        >
-          <p>{project.description}</p>
-          {project.media && <div className="pt-3">{project.media}</div>}
-        </Item>
-      ))}
-    </Section>
-  )
 
   return (
     <Shell>
@@ -222,16 +132,7 @@ export default async function Home() {
         />
       </Section>
 
-      {/* EMI-492: ?layout=a|b|c shows a shorter Projects section for comparison;
-          without it, and in the prerendered page, this is today's. */}
-      <Suspense fallback={currentProjects}>
-        <LayoutSwitch
-          current={currentProjects}
-          a={<ProjectsFeatureGrid />}
-          b={<ProjectsStage />}
-          c={<ProjectsShelf />}
-        />
-      </Suspense>
+      <Projects />
 
       <Section id="work" label="Work">
         {work.map((job) => (
