@@ -7,26 +7,60 @@ import { cn } from "@/lib/utils"
 //   - Hierarchy is ink vs grey, never boxes, rules or extra weights. The one
 //     exception is project media, which sits in a thin frame (see media.tsx).
 //   - One accent (brand ember) and one decorative element (the dawn wash at the top).
+//   - The home page's hero is the other exception: it runs wide, and its work
+//     card is a glass sheet on a halo (see .glass and .halo).
 
 const year = new Date().getFullYear()
 
 export const textLink =
   "underline decoration-foreground/25 underline-offset-[5px] transition-colors hover:text-brand hover:decoration-brand/50"
 
-export function Shell({ children }: { children: React.ReactNode }) {
+const nav = [
+  ["Projects", "/#projects"],
+  ["Work", "/#work"],
+  ["Now", "/now"],
+  ["GitHub", "https://github.com/emilthaudal"],
+]
+
+// wide: the header spans the home page's wide hero and carries the links.
+export function Shell({
+  children,
+  wide,
+}: {
+  children: React.ReactNode
+  wide?: boolean
+}) {
   return (
     <div className="relative overflow-clip">
       {/* Faint ember wash behind the top of the page (see .dawn). */}
       <div aria-hidden className="dawn" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-[47rem] flex-col px-6">
-        <header className="pt-8 sm:pt-14">
+        <header
+          className={cn(
+            "flex items-baseline justify-between pt-8 sm:pt-10",
+            wide && "breakout",
+          )}
+        >
           <Link
             href="/"
             className="text-lg font-medium tracking-tight transition-colors hover:text-brand"
           >
             Emil Thaudal Bønnerup
           </Link>
+          {wide && (
+            <nav className="hidden gap-6 text-base text-muted-foreground sm:flex">
+              {nav.map(([label, href]) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          )}
         </header>
 
         <main className="max-w-[44rem] flex-1 text-lg leading-[1.55]">

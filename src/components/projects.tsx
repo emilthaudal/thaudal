@@ -28,7 +28,8 @@ const media = {
     <PrismDemo
       alt={prism.alt}
       className={className}
-      frame={cn(frame, "sm:rounded-2xl")}
+      frame={frame}
+      compact
     />
   ),
   tui: (className?: string) => (
@@ -122,11 +123,17 @@ function Tile({
   return (
     <div
       className={cn(
-        "mb-4 flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl p-[4%]",
+        "relative mb-4 aspect-[16/10] overflow-hidden rounded-xl",
         className,
       )}
     >
-      {children}
+      {/* Positioned, so its height is definite and a picture's h-full has
+          something to resolve against. As a plain flex child of the
+          aspect-ratio box, iOS Safari sized a clip from the video's own pixel
+          width instead, wider than the page. */}
+      <div className="absolute inset-[4%] flex items-center justify-center">
+        {children}
+      </div>
     </div>
   )
 }
@@ -139,7 +146,8 @@ const claimsStats = [
   ["0", "lines by hand"],
 ]
 
-// The home page's hero shows the Prism film, so Projects leaves it out.
+// The home page shows the claims platform and the Prism film side by side
+// under its hero, so Projects leaves both pictures out.
 export { media }
 
 export function Projects() {
@@ -163,12 +171,11 @@ export function Projects() {
           </div>
         ))}
       </dl>
-      <div className="breakout pt-3">{media.claims("w-full sm:rounded-2xl")}</div>
       <Item title={prism.name} href={prism.url} details={prism.details}>
         <p>{prism.description}</p>
       </Item>
       <div className="breakout pt-3">
-        <div className="mt-6 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-x-8 gap-y-12 *:min-w-0 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <Tile className={tint.meridian}>{media.meridian(fit.meridian)}</Tile>
             <Words info={meridian} />

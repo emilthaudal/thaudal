@@ -69,9 +69,12 @@ export function PrismDemo({
   alt,
   className,
   frame,
+  compact,
 }: {
   alt: string
   className?: string
+  // Half width: the bars stay, their labels are for screen readers only.
+  compact?: boolean
   // The classes of the frame around the film.
   frame: string
 }) {
@@ -230,7 +233,7 @@ export function PrismDemo({
         />
       </div>
 
-      <figcaption className="mt-3 sm:min-h-[4.75rem]">
+      <figcaption className={cn("mt-3", !compact && "sm:min-h-[4.75rem]")}>
         <ol className="grid grid-cols-6 gap-1.5">
           {moments.map((m, i) => (
             <li key={m.label}>
@@ -253,7 +256,9 @@ export function PrismDemo({
                     className="block h-full origin-left scale-x-0 bg-foreground"
                   />
                 </span>
-                <span className="mt-2 block max-sm:sr-only">{m.label}</span>
+                <span className={cn("mt-2 block", compact ? "sr-only" : "max-sm:sr-only")}>
+                  {m.label}
+                </span>
               </button>
             </li>
           ))}

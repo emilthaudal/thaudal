@@ -75,52 +75,110 @@ const stack = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 // Server Component: only the activity grid's tooltip ships as client JS.
 
-// The claims platform's first month, as proof under the headline.
-const proof = [
-  ["~14 h", "to build Whiteaway's claims platform"],
-  ["155", "PRs merged by agents"],
-  ["0", "lines written by hand"],
+// The hero's card: where I work now and three things I've made there.
+const now = [
+  {
+    title: "Claims platform",
+    description: "A weekend project that became the group's own platform.",
+    when: "2026",
+    href: "#projects",
+  },
+  {
+    title: "Fulfilment services",
+    description: "Event-driven backends across several small teams.",
+    when: "2024 –",
+    href: "#work",
+  },
+  {
+    title: "Prism",
+    description: "The desk I run my coding agents from. Open source.",
+    when: "2026",
+    href: "#projects",
+  },
 ]
 
 export default async function Home() {
   const activity = await getGithubActivity()
 
   return (
-    <Shell>
-      <h1 className="pt-20 pb-10 text-[30px] leading-[1.2] tracking-tight sm:pt-24 sm:text-[40px]">
-        Agents write my code. I build{" "}
-        <span className="text-brand">the desk that runs them.</span>
-      </h1>
+    <Shell wide>
+      <div className="breakout grid items-start gap-x-16 gap-y-12 pt-14 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_28.5rem]">
+        <div>
+          <h1 className="text-[34px] leading-[1.08] tracking-[-0.03em] text-balance sm:text-[52px]">
+            Tech lead, backend engineer.{" "}
+            <span className="text-brand">I build with agents.</span>
+          </h1>
+          <p className="mt-6 max-w-[30rem] text-muted-foreground">
+            Nine years of warehouses, payments and fulfilment. Today I lead
+            teams at Whiteaway, where agents write my code and I build the
+            tools that make that safe.
+          </p>
+        </div>
 
-      <dl className="grid grid-cols-3 gap-x-6 pb-14 sm:gap-x-8">
-        {proof.map(([value, label]) => (
-          <div key={label} className="flex flex-col-reverse justify-end">
-            <dt className="text-sm leading-snug text-muted-foreground sm:text-base">
-              {label}
-            </dt>
-            <dd className="text-[24px] tracking-tight tabular-nums sm:text-[28px]">
-              {value}
-            </dd>
+        <div className="relative">
+          <div aria-hidden className="halo" />
+          <div className="glass p-5 pb-4 text-[15px] leading-[1.45]">
+            <p className="flex justify-between text-[13px] text-muted-foreground">
+              <span>Now</span>
+              <span>Ugelbølle, Denmark</span>
+            </p>
+            <p className="mt-2.5 text-[19px] font-medium tracking-tight">
+              Tech Lead, Whiteaway
+            </p>
+            <ul className="mt-3 -mx-1 space-y-1">
+              {now.map((item) => (
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    className="grid grid-cols-[1fr_auto] items-center gap-x-3 rounded-[11px] px-3 py-2 transition-colors hover:bg-foreground/5"
+                  >
+                    <span>{item.title}</span>
+                    <span className="row-span-2 text-[13px] text-muted-foreground tabular-nums">
+                      {item.when}
+                    </span>
+                    <span className="text-[13px] text-muted-foreground">
+                      {item.description}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 px-2 text-[13px] text-muted-foreground">
+              Before: Lunar, Beierholm, SSI Schäfer
+            </p>
           </div>
-        ))}
-      </dl>
+        </div>
+      </div>
 
-      {/* The Prism film is the page's first picture; Projects leaves it out. */}
-      <div className="breakout">{media.prism()}</div>
-      <p className="mt-4 text-base text-muted-foreground">
-        Prism, the desk I run my agents from.{" "}
-        <Link
-          href="https://github.com/emilthaudal/prism"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={textLink}
-        >
-          It&apos;s open source
-        </Link>
-        .
-      </p>
+      {/* The page's first pictures; Projects leaves both out. */}
+      <div className="breakout mt-16 grid gap-x-7 gap-y-10 *:min-w-0 sm:grid-cols-2">
+        <div>
+          <p className="mb-3 text-base">
+            Claims platform{" "}
+            <span className="text-muted-foreground">· Whiteaway</span>
+          </p>
+          {media.claims("w-full")}
+        </div>
+        <div>
+          <p className="mb-3 text-base">
+            Prism{" "}
+            <span className="text-muted-foreground">
+              ·{" "}
+              <Link
+                href="https://github.com/emilthaudal/prism"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={textLink}
+              >
+                open source
+              </Link>
+            </span>
+          </p>
+          {media.prism()}
+        </div>
+      </div>
 
-      <div className="mt-16 space-y-5">
+      <div className="mt-20 space-y-5">
         <p>
           I&apos;m a tech lead at Whiteaway in Denmark, building event-driven
           backend services with several small teams.
