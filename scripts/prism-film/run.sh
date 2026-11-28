@@ -23,7 +23,7 @@ prism=${PRISM:-$HOME/Developer/prism}
 app=$prism/mac/build/Prism.app
 out=$here/out/$ap
 rm -rf "$out"; mkdir -p "$out"
-open -g -n "$app" --args --fixture "$prism/docs/readme/fixture.json" --appearance "$ap" --background --demo-script "$here/demo.json" --motion-dir "$out"
+open -g -n "$app" --args --fixture "$prism/docs/readme/fixture.json" --appearance "$ap" --background --hide-fixture-label --demo-script "$here/demo.json" --motion-dir "$out"
 pid=""
 for _ in 1 2 3 4 5 6 7 8 9 10; do
 	sleep 0.5
