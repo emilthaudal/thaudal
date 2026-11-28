@@ -49,6 +49,7 @@ export const projectInfo = {
     description:
       "My public Claude Code plugins: a live progress band for long and multi-agent runs, a readable transcript, and per-repo GitHub accounts.",
     url: "https://github.com/emilthaudal/claude-plugins",
+    alt: "A Claude Code reply drawn as styled Markdown with a code block, a table and a quote, and the live band below it timing a running command.",
   },
   relay: {
     name: "Relay",
@@ -56,6 +57,7 @@ export const projectInfo = {
     description:
       "Syncs workouts across HealthKit, Strava and Intervals.icu, deduplicating as it goes.",
     url: "https://github.com/emilthaudal/Relay",
+    alt: "Relay's workout list: rides, runs and a swim by month, each with a badge for whether it has synced.",
   },
 } satisfies Record<string, ProjectInfo>
 
