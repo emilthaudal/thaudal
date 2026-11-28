@@ -194,6 +194,11 @@ html:has(dialog.lightbox[open]) {
   outline-offset: 2px;
 }
 
+/* Widens a block past the text column, centred, up to 68rem. */
+.breakout {
+  margin-inline: calc((100% - min(100vw - 3rem, 68rem)) / 2);
+}
+
 /* The site's one decorative element: a faint ember wash at the top of the
    page, behind the name and hero, gone before the first paragraph. It scrolls
    with the page, so no body text ever sits on it. Shell clips its overflow. */
